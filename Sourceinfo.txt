@@ -1,0 +1,3 @@
+path: http://convertjson.com/json-to-xml.htm
+https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k
+http://wiki.xmltv.org/index.php/XMLTVFormat
