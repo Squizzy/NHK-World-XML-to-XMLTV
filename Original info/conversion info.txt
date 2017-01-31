@@ -1,0 +1,60 @@
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tv source-data-url="https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k" source-info-name=“NHK World EPG Json“ source-info-url="https://www3.nhk.or.jp/nhkworld/">
+
+<channel id=“nhk.world”>
+	<display-name>NHK World</display-name>
+	<icon src="https://www3.nhk.or.jp/nhkworld/assets/images/icon_nhkworld_tv.png" />
+</channel>
+
+<programme start=“YYYYMMDDHHMMSS +0000" stop=“YYYYMMDDHHMMSS +0000" channel=“nhk.world”>
+	<title lang=“en”>X</title>
+	<sub-title lang=“en”>X</sub title>
+	<desc lang=“en”>X</desc>
+	<category lang=“en”>X1</category>
+	<category lang=“en”>X2</category>
+	<episode-num>X</episode-num>
+	<previously-shown start=“YYYYMMDDHHMMSS” />
+	<icon src=”Link” />
+</programme>
+
+
+
+
+
+Json -> xml
+
+Title -> title
+subtitle -> sub-title
+Description -> desc
+Genre, convert the numbers below to -> category
+AiringID -> episode-num
+Pubdate -> previously-shown start
+Thumbnail non S -> icon src
+
+Genre tags:
+
+NONE -> education/science/factual topics (general)
+TV 11 -> News -> news/weather report
+TV 12 -> Current Affairs -> news magazine
+TV 14 -> Biz/Tech -> technology/natural science
+TV 15 -> Documentary -> documentary
+TV 16 -> Interview -> discussion/interview/debate
+TV 17 -> Food -> cooking
+TV 18 -> Travel -> tourism/travel
+TV 19 -> Art & Design -> arts/culture magazine
+TV 20 -> Culture & Lifestyle -> leisure hobbies (general)
+TV 21 -> Entertainment -> popular culture/traditional arts
+TV 22 -> Pop Culture & Fashion -> fashion
+TV 23 -> Science & Nature -> education/science/factual topics (general)
+TV 24 -> Documentary -> discussion/interview/debate
+TV 25 -> Sports -> sports magazine
+
+
+Link
+
+/nhkworld/upld/thumbnails/en/tv/regular_program/newsline_2016.jpg
+
+Becomes
+
+https://www3.nhk.or.jp/nhkworld/upld/thumbnails/en/tv/regular_program/newsline_2016.jpg
