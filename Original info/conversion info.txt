@@ -58,3 +58,9 @@ Link
 Becomes
 
 https://www3.nhk.or.jp/nhkworld/upld/thumbnails/en/tv/regular_program/newsline_2016.jpg
+
+forget about the <previously-shown start=""> tag
+there's Pubdate and Enddate if I remember correctly
+beginning and ending times
+have to look up but I believe the end time ahs the be the same as the next program minus 1 sec
+rest should be the same

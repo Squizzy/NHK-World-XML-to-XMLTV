@@ -8,36 +8,57 @@
 
 import Foundation
 
-print("Hello, World!")
+let inputFile = "convertjson.xml"  // the original data file name
+let outputFile = "finalXML.xmltv"  // the final data file name
 
-let inputFile = "convertjson.xml"
-let outputFile = "finalXML.xmltv"
-// let text = "some1 text" //just a text
-var inputXML = String()
+var inputXML = String() // the container for the content of the inputFile
+var outputXML = String() // the container for the content for the output file
 
-if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-    
-    let inputPath = dir.appendingPathComponent(inputFile)
-    //reading
-    do {
-         inputXML = try String(contentsOf: inputPath, encoding: String.Encoding.utf8)
-    //    print("read from file: \(inputXML)")
-    }
-    catch {
-        print("Error reading the file: \(inputFile) - message: \(error.localizedDescription)")
-        /* error handling here */}
+///////
+//    Read inputFile into inputXML
+///////
+func loadXML() {
+    // path where the files will be found
+    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        // filename with path
+        let inputPath = dir.appendingPathComponent(inputFile)
+//        print("input path: \(inputPath)")
 
-    print("read from file: \(inputXML)")
-
-let outputPath = dir.appendingPathComponent(outputFile)
-    let p=1
-    //writing
-    if p==1 {
         do {
-            try inputXML.write(to: outputPath, atomically: true, encoding: String.Encoding.utf8)
+            inputXML = try String(contentsOf: inputPath, encoding: String.Encoding.utf8)
         }
         catch {
-            print("Error writing the file: \(inputFile) - message: \(error.localizedDescription)")
-            /* error handling here */}
+            print("Error reading the file: \(inputFile) - message: \(error.localizedDescription)")
+            /* error handling here */
+        }
+//    print("read from file: \(inputXML)")
     }
 }
+
+
+///////
+//    Write outputXML into outputFile
+///////
+func writeXML() {
+    // path where the files will be found
+    if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+        let outputPath = dir.appendingPathComponent(outputFile)
+        if 1==1 {
+            do {
+                try outputXML.write(to: outputPath, atomically: true, encoding: String.Encoding.utf8)
+            }
+            catch {
+                print("Error writing the file: \(inputFile) - message: \(error.localizedDescription)")
+                /* error handling here */
+            }
+        }
+    }
+}
+
+print("LoadXML")
+loadXML()
+print("equate")
+outputXML = inputXML
+print("writeXML")
+writeXML()
+print("Finished")
