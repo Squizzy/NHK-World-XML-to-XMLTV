@@ -14,6 +14,36 @@ let outputFile = "finalXML.xmltv"  // the final data file name
 var inputXML = String() // the container for the content of the inputFile
 var outputXML = String() // the container for the content for the output file
 
+class origXMLItem {
+    var seriesId:Int?
+    var airingId:Int?
+    var title:String?
+    var desc:String?
+    var link:String?
+    var pubDate:Double = 0
+    var jstrm:Int?
+    var wstrm:Int?
+    var vodReserved:Bool = false
+    var endDate:Double = 0
+    var subtitle:String?
+    var content:String?
+    var content_clean:String?
+    var thumbnail:String?
+    var thumbnail_s:String?
+    var showlist:Int?
+    var internalTag:Int?
+    var genre = [origXMLGenre]()
+    var analytics:String?
+}
+
+class origXMLGenre {
+    var TV:Int?
+    var Top:Int?
+    var LC:Int?
+}
+
+
+
 ///////
 //    Read inputFile into inputXML
 ///////
