@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		F03E55BF1E402F5700CCD03E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03E55BE1E402F5700CCD03E /* main.swift */; };
+		F0CC1CC71E42ADB100AA687E /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F0CC1CC61E42ADB100AA687E /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +27,8 @@
 		F03E55BB1E402F5700CCD03E /* NHK-World-XML-to-XMLTV */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "NHK-World-XML-to-XMLTV"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F03E55BE1E402F5700CCD03E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		F03E55C51E402F6C00CCD03E /* info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = info.plist; sourceTree = "<group>"; };
+		F0CC1CC51E42AD6100AA687E /* Original info */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Original info"; path = "../../Original info"; sourceTree = "<group>"; };
+		F0CC1CC61E42ADB100AA687E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +45,8 @@
 		F03E55B21E402F5700CCD03E = {
 			isa = PBXGroup;
 			children = (
+				F0CC1CC61E42ADB100AA687E /* README.md */,
+				F0CC1CC51E42AD6100AA687E /* Original info */,
 				F03E55BD1E402F5700CCD03E /* NHK-World-XML-to-XMLTV */,
 				F03E55BC1E402F5700CCD03E /* Products */,
 			);
@@ -122,6 +127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0CC1CC71E42ADB100AA687E /* README.md in Sources */,
 				F03E55BF1E402F5700CCD03E /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,6 +260,7 @@
 				F03E55C41E402F5700CCD03E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
