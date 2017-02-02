@@ -59,6 +59,9 @@ print("LoadXML")
 loadXML()
 print("equate")
 outputXML = inputXML
+if outputXML.contains("<title>") {
+    print("yes, contains <title>")
+}
 print("writeXML")
 writeXML()
 print("Finished")
