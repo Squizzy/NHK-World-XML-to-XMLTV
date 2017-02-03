@@ -64,3 +64,39 @@ there's Pubdate and Enddate if I remember correctly
 beginning and ending times
 have to look up but I believe the end time ahs the be the same as the next program minus 1 sec
 rest should be the same
+
+
+======
+
+Xml review
+
+
+[13:52:22]  <Badeendje>    line 5, channel id
+[14:33:16]
+[13:52:43]  <Badeendje>    you use some channel id to match with a m3u list for example
+[14:33:17]
+[13:52:57]  <Badeendje>    can't use spaces, where a space would be you usually use a dot
+[14:33:18]
+[13:53:04]  <Badeendje>    so probably nhk.world.tv
+[14:33:19]
+[13:53:42]  <Badeendje>    line 9, channel id has to match
+[14:33:20]
+[13:54:28]  <Badeendje>    pubdate and enddate form the time progression indeed
+[14:33:21]
+[13:55:09]  <Badeendje>    line 10 title looks ok
+[14:33:22]
+[13:55:18]  <Badeendje>    it's basically the episode title or name
+[14:33:23]
+[13:55:53]  <Badeendje>    line 12 pubdate I'm not sure if that gets passed on, the vod info does
+[14:33:24]
+[13:55:59]  <Badeendje>    it's the original date of airing
+[14:33:25]
+[14:00:26]  <Badeendje>    line 17 not sure
+[14:33:26]
+[14:00:33]  <Badeendje>    find that number hard to relate
+[14:33:27]
+[14:00:45]  <Badeendje>    it basically just says what series it is but in a number
+[14:33:28]
+[14:01:02]  <Badeendje>    haven't seen a rating in the data?
+[14:33:29]
+[14:01:10]  <Badeendje>    line 25
