@@ -4,3 +4,6 @@ http://wiki.xmltv.org/index.php/XMLTVFormat
 https://github.com/margro/xbmc-pvr-addons/blob/helix/addons/pvr.mediaportal.tvserver/addon/resources/genre_translation.xml
 https://github.com/AlekSi/xmltv/blob/master/example.xml
 http://www.convert-unix-time.com/?t=1486077625
+http://www.schedulesdirect.org/approvedsoftware
+https://www.npmjs.com/package/xmltv -
+https://sourceforge.net/projects/xmltv/
