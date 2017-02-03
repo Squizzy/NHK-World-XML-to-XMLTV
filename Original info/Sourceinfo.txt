@@ -3,3 +3,4 @@ https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfA
 http://wiki.xmltv.org/index.php/XMLTVFormat
 https://github.com/margro/xbmc-pvr-addons/blob/helix/addons/pvr.mediaportal.tvserver/addon/resources/genre_translation.xml
 https://github.com/AlekSi/xmltv/blob/master/example.xml
+http://www.convert-unix-time.com/?t=1486077625

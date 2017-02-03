@@ -2,17 +2,17 @@
 //  main.swift
 //  NHK-World-XML-to-XMLTV
 //
-//  Created by Guillaume on 31/01/2017.
+//  Created by CrazySquirrel (Squizzy) on 31/01/2017.
 //  Copyright © 2017 CrazySquirrel. All rights reserved.
 //
 
 import Foundation
 
-let inputFile = "convertjson.xml"  // the original data file name
-let outputFile = "finalXML.xmltv"  // the final data file name
 
-var inputXML = String() // the container for the content of the inputFile
-var outputXML = String() // the container for the content for the output file
+//////
+//      origXMLItem:     Class for the original file XML
+//      origXMLGenre:    Class of genres
+/////
 
 class origXMLItem {
     var seriesId:Int?
@@ -42,56 +42,84 @@ class origXMLGenre {
     var LC:Int?
 }
 
+//////
+//      getDate     converts unix time format to required time format (after adjusting number)
+//      @ timezone: +1h = 0100, +2.5h = 0250, -6 = -0600
+//      @ length:   0 = short (YYYYMMDD], other = full [YYYYMMDDhhmmss zzzzz] (zzzzz is timezone, first digit may be "-")
+//      output:     String containing the date
+/////
 
+func getDate(unixDate: Int, timezone: String, length: Int) -> String {
+    var finalDateString=""
+    let adjustedUnixDate = unixDate / 1000
+    if adjustedUnixDate == 0 {return "No Date Provided"}
+    let date = NSDate(timeIntervalSince1970: TimeInterval(adjustedUnixDate))
+    let dayTimePeriodFormatter = DateFormatter()
+    if length==0 {
+        dayTimePeriodFormatter.dateFormat = "YYYYMMDD"
+         finalDateString = dayTimePeriodFormatter.string(from: date as Date)
+    } else {
+        dayTimePeriodFormatter.dateFormat = "YYYYMMDDhhmmss"
+        let dateString = dayTimePeriodFormatter.string(from: date as Date)
+        finalDateString = dateString + timezone
+    }
+    return "\(finalDateString)"
+}
 
 ///////
-//    Read inputFile into inputXML
+//      loadXML:      Read inputFile into a string
+//      @ inputFile:  String (eg "inputfile.txt")
+//      output:       outputs a String
 ///////
-func loadXML() {
+
+func loadXML(inputFile:String) -> String {
+    var fileText:String = ""
+
     // path where the files will be found
     if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
         // filename with path
         let inputPath = dir.appendingPathComponent(inputFile)
-//        print("input path: \(inputPath)")
 
         do {
-            inputXML = try String(contentsOf: inputPath, encoding: String.Encoding.utf8)
+            fileText = try String(contentsOf: inputPath, encoding: String.Encoding.utf8)
         }
         catch {
             print("Error reading the file: \(inputFile) - message: \(error.localizedDescription)")
             /* error handling here */
         }
-//    print("read from file: \(inputXML)")
     }
+    return fileText
 }
 
 
 ///////
-//    Write outputXML into outputFile
+//      writeXML:           Write outputContent into outputFile
+//      @ outputFile:       String of the file name, eg "Out.txt"
+//      @ outputContent:    String containing the content to write into the file
+//      output:             None
 ///////
-func writeXML() {
+
+func writeXML(outputFile:String, outputContent:String) {
     // path where the files will be found
     if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
         let outputPath = dir.appendingPathComponent(outputFile)
-        if 1==1 {
-            do {
-                try outputXML.write(to: outputPath, atomically: true, encoding: String.Encoding.utf8)
-            }
-            catch {
-                print("Error writing the file: \(inputFile) - message: \(error.localizedDescription)")
-                /* error handling here */
-            }
+        do {
+            try outputContent.write(to: outputPath, atomically: true, encoding: String.Encoding.utf8)
+        }
+        catch {
+            print("Error writing the file: \(outputFile) - message: \(error.localizedDescription)")
+            /* error handling here */
         }
     }
 }
 
+// tester program
 print("LoadXML")
-loadXML()
+let tmpXML = loadXML(inputFile: "convertjson.xml")
 print("equate")
-outputXML = inputXML
-if outputXML.contains("<title>") {
+if tmpXML.contains("<title>") {
     print("yes, contains <title>")
 }
 print("writeXML")
-writeXML()
+writeXML(outputFile: "finalXML1.xmltv", outputContent: tmpXML)
 print("Finished")
