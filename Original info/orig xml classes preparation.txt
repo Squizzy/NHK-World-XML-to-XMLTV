@@ -1,0 +1,56 @@
+class origXMLItem {
+    var seriesId:Int?
+    var airingId:Int?
+    var title:String?
+    var desc:String?
+    var link:String?
+    var pubDate:Double = 0
+    var jstrm:Int?
+    var wstrm:Int?
+    var vodReserved:Bool = false
+    var endDate:Double = 0
+    var subtitle:String?
+    var content:String?
+    var content_clean:String?
+    var thumbnail:String?
+    var thumbnail_s:String?
+    var showlist:Int?
+    var internalTag:Int?
+    var genre = [origXMLGenre]()
+    var analytics:String?
+}
+
+class origXMLGenre {
+    var TV:Int?
+    var Top:Int?
+    var LC:Int?
+}
+
+
+<channel>
+  <item>
+    <seriesId>2059</seriesId>
+    <airingId>002</airingId>
+    <title>J-Trip Plan</title>
+    <description>Today: Your stunning scenes of Japan &amp; An industrial nightscape outside Osaka. This travel show provides info on what to see and do, and how to experience Japan, like an expert.</description>
+    <link>/nhkworld/en/tv/jtripplan/201701230600/</link>
+    <pubDate>1485808200000</pubDate>
+    <jstrm>1</jstrm>
+    <wstrm>1</wstrm>
+    <vodReserved>true</vodReserved>
+    <endDate>1485810000000</endDate>
+    <subtitle>Your Stunning Scenes of Japan &amp; An Industrial Nightscape outside Osaka</subtitle>
+    <content>We look at amazing Japanese scenes sent by viewers, including vistas in Yamagata and Kagoshima Prefecture. Our reporter travels from Osaka to nearby Amagasaki, an industrial city in Hyogo Prefecture. First she explores the lively, friendly shopping arcade. She then cruises through the canals before heading for a closer look at the factories lit up at night. Industrial nightscapes in Japan have recently become popular tourist spots. The snaking pipes and rising steam create mysterious yet beautiful scenes. &lt;br /&gt;&lt;br /&gt;&lt;em&gt;Hosts:&lt;/em&gt; Thane Camus, Amy Ota</content>
+    <content_clean>We look at amazing Japanese scenes sent by viewers, including vistas in Yamagata and Kagoshima Prefecture. Our reporter travels from Osaka to nearby Amagasaki, an industrial city in Hyogo Prefecture. First she explores the lively, friendly shopping arcade. She then cruises through the canals before heading for a closer look at the factories lit up at night. Industrial nightscapes in Japan have recently become popular tourist spots. The snaking pipes and rising steam create mysterious yet beautiful scenes. 
+Hosts: Thane Camus, Amy Ota</content_clean>
+    <thumbnail>/nhkworld/upld/thumbnails/en/tv/jtripplan/tv_episode_201701230600_01_large.jpg</thumbnail>
+    <thumbnail_s>/nhkworld/upld/thumbnails/en/tv/jtripplan/tv_episode_201701230600_01_small.jpg</thumbnail_s>
+    <showlist>1</showlist>
+    <internal>1</internal>
+    <genre>
+      <TV>18</TV>
+      <Top>15</Top>
+      <LC>14</LC>
+    </genre>
+    <analytics>[nhkworld]w02,001;2059-002-2017;J-Trip Plan;Your Stunning Scenes of Japan &amp; An Industrial Nightscape outside Osaka;en</analytics>
+  </item>

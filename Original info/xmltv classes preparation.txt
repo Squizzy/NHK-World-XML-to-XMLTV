@@ -1,0 +1,67 @@
+class channelOutXML {
+  var display-name:String?
+  var icon:String?
+  var programme = [programmeOutXML]()
+}
+
+class programmeOutXML {
+  var title:String?
+  var desc:String?
+  var date:Double?
+  var category:String?()
+  var episode:String?
+  var system:Int?
+  var audio = [audioOutXML]()?
+  var previously-shown
+}
+
+class audioOutXML {
+  var stereo:String?
+}
+
+
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv 
+    source-info-url="http://www.schedulesdirect.org/" 
+    source-info-name="Schedules Direct" 
+    generator-info-name="XMLTV/$Id: tv_grab_na_dd.in,v 1.70 2008/03/03 15:21:41 rmeden Exp $" g
+    enerator-info-url="http://www.xmltv.org/">
+
+  <channel 
+      id="I10436.labs.zap2it.com">
+    <display-name>13 KERA</display-name>
+    <icon 
+        src="file://C:\Perl\site/share/xmltv/icons/KERA.gif" />
+  </channel>
+
+  <programme start="20080715003000 -0600" stop="20080715010000 -0600" channel="I10436.labs.zap2it.com">
+    <title 
+        lang="en">NOW on PBS</title>
+
+    <desc 
+        lang="en">Jordan's Queen Rania has made job creation a priority to help curb the staggering unemployment rates among youths in the Middle East.</desc>
+    <date>20080711</date>
+    <category
+        lang="en">Newsmagazine</category>
+    <category 
+        lang="en">Interview</category>
+    <category l
+        ang="en">Public affairs</category>
+    <category 
+        lang="en">Series</category>
+    <episode-num 
+        system="dd_progid">EP01006886.0028</episode-num>
+    <episode-num 
+        system="onscreen">427</episode-num>
+    <audio>
+      <stereo>stereo</stereo>
+    </audio>
+    <previously-shown start="20080711000000" />
+    <subtitles type="teletext" />
+    <rating 
+        system="VCHIP">
+      <value>TV-14</value>
+    </rating>
+  </programme>
