@@ -7,3 +7,8 @@ http://www.convert-unix-time.com/?t=1486077625
 http://www.schedulesdirect.org/approvedsoftware
 https://www.npmjs.com/package/xmltv -
 https://sourceforge.net/projects/xmltv/
+
+
+#EXTM3U
+#EXTINF:0,NHK World
+https://nhkwtv-i.akamaihd.net/hls/live/263942/nhkwtv/index_2100.m3u8

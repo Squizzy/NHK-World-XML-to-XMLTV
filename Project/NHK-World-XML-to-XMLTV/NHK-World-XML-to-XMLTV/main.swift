@@ -42,6 +42,81 @@ class origXMLGenre {
     var LC:Int?
 }
 
+
+class outXMLtv {
+    var source-info-url:String = "http://www.schedulesdirect.org/"
+    var source-info-name:String="Schedules Direct"
+    var generator-info-name:String="XMLTV/$Id: Badeendje,v 0.01 2017/02/06 15:21:41 rmeden Exp $"
+    var generator-info-url:String="http://www.xmltv.org/"
+    var channel:channelOutXML[]?
+    var programme:programmeOutXML[]?
+    init {
+        source-info-url
+    }
+}
+
+class outXMLchannel {
+    var id:String?
+    var display-name:String?
+    var icon:String?
+}
+
+class outXMLicon {
+    var src:String?
+}
+
+class outXMLprogramme {
+    var title:titleOutXML[]?
+    var desc:descOutXML[]?
+    var date:Double?
+    var category:categoryOutXML[]?
+    var episode:episodenumOutXML[]?
+    var audio:audioOutXML[]?
+    var previouslyShown: prevshownOutXML[]?
+    var subtitlesOutXML[]?
+    var ratingOutXML[]?
+}
+
+class outXMLtitle {
+    var lang:String="en"
+    var title-text:String?
+}
+
+class outXMLdesc {
+    var lang:String="en"
+    var desc-text:String?
+}
+
+class outXMLcategory {
+    var lang:String="en"
+    var category-text:String?
+}
+
+class outXMLepisodenum {
+    var episodenumsystem:String="en"
+    var episodenum-text:String?
+}
+
+class outXMLaudio {
+    var stereo:String?
+}
+
+class outXMLpreviouslyshown {
+    var start:String?
+}
+
+class outXMLsubtitles {
+    var type:String?
+}
+
+
+class ratingOutXML {
+    var system:String?
+    var value:String?
+}
+
+
+
 //////
 //      getDate     converts unix time format to required time format (after adjusting number)
 //      @ timezone: +1h = 0100, +2.5h = 0250, -6 = -0600
