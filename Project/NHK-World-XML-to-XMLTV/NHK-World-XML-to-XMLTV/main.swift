@@ -42,22 +42,23 @@ class origXMLGenre {
     var LC:Int?
 }
 
+//////
+//      Need desc for out classes...
+//
+/////
 
 class outXMLtv {
-    var source-info-url:String = "http://www.schedulesdirect.org/"
-    var source-info-name:String="Schedules Direct"
-    var generator-info-name:String="XMLTV/$Id: Badeendje,v 0.01 2017/02/06 15:21:41 rmeden Exp $"
-    var generator-info-url:String="http://www.xmltv.org/"
-    var channel:channelOutXML[]?
-    var programme:programmeOutXML[]?
-    init {
-        source-info-url
-    }
+    var sourceInfoUrl:String = "http://www.schedulesdirect.org/"
+    var sourceInfoName:String="Schedules Direct"
+    var generatorInfoName:String="XMLTV/$Id: Badeendje,v 0.01 2017/02/06 15:21:41 rmeden Exp $"
+    var generatorInfoUrl:String="http://www.xmltv.org/"
+    var channel = [outXMLchannel]()
+    var programme = [outXMLprogramme]()
 }
 
 class outXMLchannel {
     var id:String?
-    var display-name:String?
+    var displayName:String?
     var icon:String?
 }
 
@@ -66,35 +67,35 @@ class outXMLicon {
 }
 
 class outXMLprogramme {
-    var title:titleOutXML[]?
-    var desc:descOutXML[]?
+    var title = [outXMLtitle]()
+    var desc = [outXMLdesc]()
     var date:Double?
-    var category:categoryOutXML[]?
-    var episode:episodenumOutXML[]?
-    var audio:audioOutXML[]?
-    var previouslyShown: prevshownOutXML[]?
-    var subtitlesOutXML[]?
-    var ratingOutXML[]?
+    var category = [outXMLcategory]()
+    var episode = [outXMLepisodenum]()
+    var audio = [outXMLaudio]()
+    var previouslyShown = [outXMLpreviouslyshown]()
+    var subtitles = [outXMLsubtitles]()
+    var rating = [outXMLrating]()
 }
 
 class outXMLtitle {
     var lang:String="en"
-    var title-text:String?
+    var titleText:String?
 }
 
 class outXMLdesc {
     var lang:String="en"
-    var desc-text:String?
+    var descText:String?
 }
 
 class outXMLcategory {
     var lang:String="en"
-    var category-text:String?
+    var categoryText:String?
 }
 
 class outXMLepisodenum {
     var episodenumsystem:String="en"
-    var episodenum-text:String?
+    var episodenumText:String?
 }
 
 class outXMLaudio {
@@ -110,7 +111,7 @@ class outXMLsubtitles {
 }
 
 
-class ratingOutXML {
+class outXMLrating {
     var system:String?
     var value:String?
 }
