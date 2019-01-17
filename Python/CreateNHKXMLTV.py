@@ -1,8 +1,17 @@
+__author__ = "Squizzy"
+__copyright__ = "Copyright 2019, Squizzy"
+__credits__ = "The respective websites, and whoever took time to share information on how to use Python and modules"
+__license__ = "GPL"
+__version__ = "1.0.2"
+__maintainer__ = "Squizzy"
+
 import json
 import datetime
 import xml.etree.ElementTree as xml
 
 jsonInFile = 'all-json-example.json'
+# reference for later when pulling off the internet directly:
+# JsonInURL = 'https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k'
 XMLOutFile = 'ConvertedNHK.xml'
 
 
@@ -10,6 +19,8 @@ XMLOutFile = 'ConvertedNHK.xml'
 def adj_date(u): return datetime.datetime.utcfromtimestamp(int(u[:-3])).strftime('%Y%m%d%H%M%S')
 
 
+# indent: beautify the xml to be output, rather than having it stay on one line
+# Origin: http://effbot.org/zone/element-lib.htm#prettyprint
 def indent(elem, level=0):
     i = "\n" + level * "\t"
     if len(elem):
