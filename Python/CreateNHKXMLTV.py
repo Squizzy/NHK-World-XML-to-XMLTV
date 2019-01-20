@@ -87,9 +87,9 @@ for item in nhkimported["channel"]["item"]:
     if genre == "":
         category = genres[None]
     elif isinstance(genre, str):
-        category = genres[int(genre)]
+        category = genres[int(genre)].lower()
     elif isinstance(genre, list):
-        category = genres[int(genre[0])]
+        category = genres[int(genre[0])].lower()
     else:
         category = genres[None]
 
