@@ -1,14 +1,21 @@
 # Requirements:
  - Python 3.x (tested with Python 3.7)
- - The correct json file stored in the same folder, called "all-json-example.json"
+ - NO LONGER USED WITH V1.1: The correct json file stored in the same folder, called "all-json-example.json"
 
 # To run the program:
 - From Windows command line: "python.exe .\CreateNHKXMLTV.py"
-- From Mac, Linux - not tested yet, but should be simply
-"python ./CreateNHKXMLTV.py" or
-"python-3.7 ./CreateNHKXMLTV.py" if needed
+- From Mac "python ./CreateNHKXMLTV.py" or "python-3.7 ./CreateNHKXMLTV.py" if needed
+- Linux - not tested yet, but should be same as Mac
 
 # Versions
+20 Jan 2019 - v1.1 - changed to pulling the file from URL
+
+20 Jan 2019 - v1.0.5 - add second category (genre) for channels which have it
+
+20 Jan 2019 - v1.0.4 - corrected <category> (genre) to use all lowercase
+
+20 Jan 2019 - v1.0.3 - corrected <Icon> typo
+
 19 Jan 2019 - v1.0.2 - added header, version, licence, and reference URL for later
 
 19 Jan 2019 - v1.0.1 - Some tidying up

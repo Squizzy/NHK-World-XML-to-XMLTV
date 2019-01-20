@@ -2,17 +2,25 @@ __author__ = "Squizzy"
 __copyright__ = "Copyright 2019, Squizzy"
 __credits__ = "The respective websites, and whoever took time to share information on how to use Python and modules"
 __license__ = "GPL"
-__version__ = "1.0.3"
+__version__ = "1.1"
 __maintainer__ = "Squizzy"
 
 import json
 import datetime
 import xml.etree.ElementTree as xml
+import urllib.request
 
-jsonInFile = 'all-json-example.json'
+# jsonInFile = 'all-json-example.json'
+jsonInFile = 'DownloadedJSON.json'
 # reference for later when pulling off the internet directly:
-# JsonInURL = 'https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k'
+JsonInURL = 'https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k'
 XMLOutFile = 'ConvertedNHK.xml'
+
+# Import the .json from the URL
+with urllib.request.urlopen(JsonInURL) as url:
+    data = json.load(url)
+with open(jsonInFile, 'w') as jsonfile:
+    json.dump(data, jsonfile)
 
 
 # adj_date: convert the unix date with extra 3 "0" to the xmltv date format
