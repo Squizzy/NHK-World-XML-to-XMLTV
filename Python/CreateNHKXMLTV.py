@@ -106,7 +106,7 @@ for item in nhkimported["channel"]["item"]:
     progSub.text = subtitle
     progDesc = xml.SubElement(programme, 'desc')
     progDesc.set('lang', 'en')
-    progDesc.text = "BADEENDJE: " + description
+    progDesc.text = description
     progCat1 = xml.SubElement(programme, 'category')
     progCat1.set('lang', 'en')
     progCat1.text = category
