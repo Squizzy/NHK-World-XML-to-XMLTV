@@ -84,14 +84,16 @@ for item in nhkimported["channel"]["item"]:
     episodeNum = item["airingId"]
     iconLink = "https://www3.nhk.or.jp" + item["thumbnail"]
     genre = item["genre"]["TV"]
+    category2 = ""
     if genre == "":
-        category = genres[None]
+        category1 = genres[None]
     elif isinstance(genre, str):
-        category = genres[int(genre)].lower()
+        category1 = genres[int(genre)].lower()
     elif isinstance(genre, list):
-        category = genres[int(genre[0])].lower()
+        category1 = genres[int(genre[0])].lower()
+        category2 = genres[int(genre[1])].lower()
     else:
-        category = genres[None]
+        category1 = genres[None]
 
     # construct the program info xml tree
     programme = xml.SubElement(root, 'programme')
@@ -109,7 +111,11 @@ for item in nhkimported["channel"]["item"]:
     progDesc.text = description
     progCat1 = xml.SubElement(programme, 'category')
     progCat1.set('lang', 'en')
-    progCat1.text = category
+    progCat1.text = category1
+    if category2 != "":
+        progCat2 = xml.SubElement(programme, 'category')
+        progCat2.set('lang', 'en')
+        progCat2.text = category2
     progEpNum = xml.SubElement(programme, 'episode-num')
     progEpNum.text = episodeNum
     progIcon = xml.SubElement(programme, 'icon')
