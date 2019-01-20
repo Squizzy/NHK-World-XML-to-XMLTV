@@ -2,7 +2,7 @@ __author__ = "Squizzy"
 __copyright__ = "Copyright 2019, Squizzy"
 __credits__ = "The respective websites, and whoever took time to share information on how to use Python and modules"
 __license__ = "GPL"
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 __maintainer__ = "Squizzy"
 
 import json
@@ -106,13 +106,13 @@ for item in nhkimported["channel"]["item"]:
     progSub.text = subtitle
     progDesc = xml.SubElement(programme, 'desc')
     progDesc.set('lang', 'en')
-    progDesc.text = description
+    progDesc.text = "BADEENDJE: " + description
     progCat1 = xml.SubElement(programme, 'category')
     progCat1.set('lang', 'en')
     progCat1.text = category
     progEpNum = xml.SubElement(programme, 'episode-num')
     progEpNum.text = episodeNum
-    progIcon = xml.SubElement(programme, 'episode-num')
+    progIcon = xml.SubElement(programme, 'icon')
     progIcon.set('src', iconLink)
 
 indent(root)

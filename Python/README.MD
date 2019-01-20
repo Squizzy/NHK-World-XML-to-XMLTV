@@ -1,6 +1,6 @@
 # Requirements:
  - Python 3.x (tested with Python 3.7)
- - the correct json file stored in the same folder, called  "all-json-example.json"
+ - The correct json file stored in the same folder, called "all-json-example.json"
 
 # To run the program:
 - From Windows command line: "python.exe .\CreateNHKXMLTV.py"
