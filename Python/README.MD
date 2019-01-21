@@ -8,6 +8,9 @@
 - Linux - not tested yet, but should be same as Mac
 
 # Versions
+21 Jan 2019 - V1.1 - Windows Executable created using "auto-py-to-exe.exe .\CreateNHKXMLTV.py" (auto-pi-to-exe v2.5.1)\
+File to be found under "output" folder. Not virus checked.
+
 20 Jan 2019 - v1.1 - changed to pulling the file from URL
 
 20 Jan 2019 - v1.0.5 - add second category (genre) for channels which have it
