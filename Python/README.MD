@@ -1,10 +1,10 @@
 # Requirements:
- - Python 3.x (tested with Python 3.7)
- - NO LONGER USED WITH V1.1: The correct json file stored in the same folder, called "all-json-example.json"
+ - Python 3.x (tested with Python 3.11.2)
+ - Internet connection as the application pulls the JSON file off the NHK website
 
 # To run the program:
 - From Windows command line: "python.exe .\CreateNHKXMLTV.py"
-- From Mac "python ./CreateNHKXMLTV.py" or "python-3.7 ./CreateNHKXMLTV.py" if needed
+- From Mac "python ./CreateNHKXMLTV.py" or "python-3.11 ./CreateNHKXMLTV.py" if needed
 - Linux - not tested yet, but should be same as Mac
 
 # Versions
