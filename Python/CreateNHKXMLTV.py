@@ -1,6 +1,8 @@
+""" Python application to convert NHK EPG in JSON into XMLTV standard"""
 __author__ = "Squizzy"
 __copyright__ = "Copyright 2019, Squizzy"
-__credits__ = "The respective websites, and whoever took time to share information on how to use Python and modules"
+__credits__ = "The respective websites, and whoever took time to share information\
+                 on how to use Python and modules"
 __license__ = "GPL"
 ## updated version following changes proposed by fxbx below
 __version__ = "1.2"
@@ -23,26 +25,28 @@ XMLOutFile = 'ConvertedNHK.xml'
 rootURL = "https://www3.nhk.or.jp"
 ChannelIconURL = rootURL + "nhkworld/assets/images/icon_nhkworld_tv.png"
 
-# In case the time offset is incorrect in the XMLTV file, the value below can be modified to adjust it - for example -0100 would change to -1 UTC
+# In case the time offset is incorrect in the XMLTV file, the value below 
+# can be modified to adjust it: For example -0100 would change to -1 UTC
 timeOffset = ' +0000'
 
 # Import the .json from the URL
 with urllib.request.urlopen(JsonInURL) as url:
     data = json.load(url)
-if (DEBUG):
-    with open(jsonInFile, 'w') as jsonfile:
+if DEBUG:
+    with open(jsonInFile, 'w', encoding="utf-8") as jsonfile:
         json.dump(data, jsonfile)
 
 
-# adj_date: convert the unix date with extra 3 "0" to the xmltv date format
 ## Replaced deprecated utcfromtimestamp() method
 # def adj_date(u): return datetime.utcfromtimestamp(int(u[:-3])).strftime('%Y%m%d%H%M%S')
-def adj_date(u): return datetime.fromtimestamp(int(u[:-3]), tz = timezone.utc).strftime('%Y%m%d%H%M%S')
+def adj_date(u):
+    """ adj_date: convert the unix date with extra 3 "0" to the xmltv date format """
+    return datetime.fromtimestamp(int(u[:-3]), tz = timezone.utc).strftime('%Y%m%d%H%M%S')
 
 
-# indent: beautify the xml to be output, rather than having it stay on one line
-# Origin: http://effbot.org/zone/element-lib.htm#prettyprint
 def indent(elem, level=0):
+    """ indent: beautify the xml to be output, rather than having it stay on one line
+        Origin: http://effbot.org/zone/element-lib.htm#prettyprint """
     i = "\n" + level * "\t"
     if len(elem):
         if not elem.text or not elem.text.strip():
@@ -96,7 +100,7 @@ channelDisplayName.text = 'NHK World'
 channelIcon = xml.SubElement(channel, 'icon')
 channelIcon.set('src', ChannelIconURL)
 
-if (DEBUG):
+if DEBUG:
     # load the json file from local storage
     with open(jsonInFile, 'r', encoding='utf8') as nhkjson:
         nhkimported = json.load(nhkjson)
