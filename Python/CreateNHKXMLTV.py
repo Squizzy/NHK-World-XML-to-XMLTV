@@ -7,7 +7,7 @@ __version__ = "1.2"
 __maintainer__ = "Squizzy"
 
 import json
-import datetime
+from datetime import datetime, timezone
 import xml.etree.ElementTree as xml
 import urllib.request
 
@@ -27,7 +27,9 @@ with open(jsonInFile, 'w') as jsonfile:
 
 
 # adj_date: convert the unix date with extra 3 "0" to the xmltv date format
-def adj_date(u): return datetime.datetime.utcfromtimestamp(int(u[:-3])).strftime('%Y%m%d%H%M%S')
+## Replaced deprecated utcfromtimestamp() method
+# def adj_date(u): return datetime.utcfromtimestamp(int(u[:-3])).strftime('%Y%m%d%H%M%S')
+def adj_date(u): return datetime.fromtimestamp(int(u[:-3]), tz = timezone.utc).strftime('%Y%m%d%H%M%S')
 
 
 # indent: beautify the xml to be output, rather than having it stay on one line
