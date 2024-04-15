@@ -15,7 +15,6 @@ import urllib.request
 jsonInFile = 'DownloadedJSON.json'
 # reference for later when pulling off the internet directly:
 #fxbx 7-20-2023 new authentication-less URL? replacing:
-#JsonInURL = 'https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k'
 JsonInURL = "https://nwapi.nhk.jp/nhkworld/epg/v7b/world/all.json"
 XMLOutFile = 'ConvertedNHK.xml'
 
