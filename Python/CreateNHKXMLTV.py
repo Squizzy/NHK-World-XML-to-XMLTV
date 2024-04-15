@@ -6,10 +6,17 @@ __license__ = "GPL"
 __version__ = "1.3"
 __maintainer__ = "Squizzy"
 
+import sys
 import json
 from datetime import datetime, timezone
 import xml.etree.ElementTree as xml
-import urllib.request
+if sys.version_info[0] < 3:
+    # for use with Python 2.7 on libreelec
+    import urllib
+else:
+    import urllib.request
+
+DEBUG = False
 
 # jsonInFile = 'all-json-example.json'
 jsonInFile = 'DownloadedJSON.json'
@@ -25,10 +32,15 @@ ChannelIconURL = rootURL + "nhkworld/assets/images/icon_nhkworld_tv.png"
 timeOffset = ' +0000'
 
 # Import the .json from the URL
-with urllib.request.urlopen(JsonInURL) as url:
+if sys.version_info[0] < 3:
+    # Dazzhk Mod
+    url = urllib.urlopen(JsonInURL)
     data = json.load(url)
-with open(jsonInFile, 'w') as jsonfile:
-    json.dump(data, jsonfile)
+else:
+    with urllib.request.urlopen(JsonInURL) as url:
+        data = json.load(url)
+    with open(jsonInFile, 'w') as jsonfile:
+        json.dump(data, jsonfile)
 
 
 # adj_date: convert the unix date with extra 3 "0" to the xmltv date format
