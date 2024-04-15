@@ -2,8 +2,8 @@ __author__ = "Squizzy"
 __copyright__ = "Copyright 2019, Squizzy"
 __credits__ = "The respective websites, and whoever took time to share information on how to use Python and modules"
 __license__ = "GPL"
-## updated version following changes proposed by fxbx below
-__version__ = "1.2"
+## updated version following changes proposed by dazzhk to work with python2.x
+__version__ = "1.3"
 __maintainer__ = "Squizzy"
 
 import json
