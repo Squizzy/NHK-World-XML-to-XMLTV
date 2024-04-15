@@ -1,9 +1,15 @@
 # Conversion of NHK's EPG in JSON to XMLTV - v1.2
 
-Python version (under Python folder above)
+Python v3 (under Python folder above)
 * Only file "CreateNHKXMLTV.py" is needed (+ Python on the machine on which it is run of course)
 * Requires Python 3.x
 * Runs on Windows, MacOS, Linux
+
+Python v2
+* --> branch p2 implements using python v2 as per dazzhk implementation. it is not merged into master yet as it is not tested
+* Requires Python 2.x
+* Should on Windows, MacOS, Linux
+* Any feedback on testing welcome
 
 
 # Background info
