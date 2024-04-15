@@ -2,7 +2,8 @@ __author__ = "Squizzy"
 __copyright__ = "Copyright 2019, Squizzy"
 __credits__ = "The respective websites, and whoever took time to share information on how to use Python and modules"
 __license__ = "GPL"
-__version__ = "1.1"
+## updated version following changes proposed by fxbx below
+__version__ = "1.2"
 __maintainer__ = "Squizzy"
 
 import json
@@ -13,7 +14,9 @@ import urllib.request
 # jsonInFile = 'all-json-example.json'
 jsonInFile = 'DownloadedJSON.json'
 # reference for later when pulling off the internet directly:
-JsonInURL = 'https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k'
+#fxbx 7-20-2023 new authentication-less URL? replacing:
+#JsonInURL = 'https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k'
+JsonInURL = "https://nwapi.nhk.jp/nhkworld/epg/v7b/world/all.json"
 XMLOutFile = 'ConvertedNHK.xml'
 
 # Import the .json from the URL
@@ -60,7 +63,13 @@ genres = {None: "General",
           22: "Pop Culture & Fashion",
           23: "Science & Nature",
           24: "Documentary",
-          25: "Sports"}
+          25: "Sports",
+          26: "Drama",
+          27: "Interactive",
+          28: "Learn Japanese",
+          29: "Disaster Preparedness",
+          30: "Kids", #fxbx: last cat as of 7-20-2023
+}
 
 # Start filling in the table XML tree with content that is useless and might not change
 root = xml.Element('tv')
