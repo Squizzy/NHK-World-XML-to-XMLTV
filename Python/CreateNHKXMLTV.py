@@ -19,6 +19,9 @@ jsonInFile = 'DownloadedJSON.json'
 JsonInURL = "https://nwapi.nhk.jp/nhkworld/epg/v7b/world/all.json"
 XMLOutFile = 'ConvertedNHK.xml'
 
+rootURL = "https://www3.nhk.or.jp"
+ChannelIconURL = rootURL + "nhkworld/assets/images/icon_nhkworld_tv.png"
+
 # Import the .json from the URL
 with urllib.request.urlopen(JsonInURL) as url:
     data = json.load(url)
@@ -77,8 +80,7 @@ genres = {None: "General",
 
 # Start filling in the table XML tree with content that is useless and might not change
 root = xml.Element('tv')
-root.set('source-data-url', 'https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=\
-EJfK8jdS57GqlupFgAfAAwr573q01y6k')
+root.set('source-data-url', JsonInURL)
 root.set('source-info-name', 'NHK World EPG Json')
 root.set('source-info-url', 'https://www3.nhk.or.jp/nhkworld/')
 
@@ -87,7 +89,7 @@ channel.set('id', 'nhk.world')
 channelDisplayName = xml.SubElement(channel, 'display-name')
 channelDisplayName.text = 'NHK World'
 channelIcon = xml.SubElement(channel, 'icon')
-channelIcon.set('src', 'https://www3.nhk.or.jp/nhkworld/assets/images/icon_nhkworld_tv.png')
+channelIcon.set('src', ChannelIconURL)
 
 # load the json file from local storage
 with open(jsonInFile, 'r', encoding='utf8') as nhkjson:
@@ -96,14 +98,25 @@ with open(jsonInFile, 'r', encoding='utf8') as nhkjson:
 # Go through all items, though only interested in the Programmes information here
 for item in nhkimported["channel"]["item"]:
 
-    # The useful information, ready to be inserted
-    start = adj_date(item["pubDate"])
-    end = adj_date(item["endDate"])
-    title = item["title"]
-    subtitle = item["subtitle"]
-    description = item["description"]
-    episodeNum = item["airingId"]
-    iconLink = "https://www3.nhk.or.jp" + item["thumbnail"]
+    # construct the program info xml tree
+
+    programme = xml.SubElement(root, 'programme')
+    programme.set('start', adj_date(item["pubDate"]) + ' +0000')
+    programme.set('stop', adj_date(item["endDate"]) + ' +0000')
+    programme.set('channel', 'nhk.world')
+
+    progTitle = xml.SubElement(programme, 'title')
+    progTitle.set('lang', 'en')
+    progTitle.text = item["title"]
+
+    progSub = xml.SubElement(programme, 'sub-title')
+    progSub.set('lang', 'en')
+    progSub.text = item["subtitle"]
+
+    progDesc = xml.SubElement(programme, 'desc')
+    progDesc.set('lang', 'en')
+    progDesc.text = item["description"]
+
     genre = item["genre"]["TV"]
     category2 = ""
     if genre == "":
@@ -116,31 +129,20 @@ for item in nhkimported["channel"]["item"]:
     else:
         category1 = genres[None]
 
-    # construct the program info xml tree
-    programme = xml.SubElement(root, 'programme')
-    programme.set('start', start + ' +0000')
-    programme.set('stop', end + ' +0000')
-    programme.set('channel', 'nhk.world')
-    progTitle = xml.SubElement(programme, 'title')
-    progTitle.set('lang', 'en')
-    progTitle.text = title
-    progSub = xml.SubElement(programme, 'sub-title')
-    progSub.set('lang', 'en')
-    progSub.text = subtitle
-    progDesc = xml.SubElement(programme, 'desc')
-    progDesc.set('lang', 'en')
-    progDesc.text = description
     progCat1 = xml.SubElement(programme, 'category')
     progCat1.set('lang', 'en')
     progCat1.text = category1
+
     if category2 != "":
         progCat2 = xml.SubElement(programme, 'category')
         progCat2.set('lang', 'en')
         progCat2.text = category2
+
     progEpNum = xml.SubElement(programme, 'episode-num')
-    progEpNum.text = episodeNum
+    progEpNum.text = item["airingId"]
+
     progIcon = xml.SubElement(programme, 'icon')
-    progIcon.set('src', iconLink)
+    progIcon.set('src', rootURL + item["thumbnail"])
 
 indent(root)
 
