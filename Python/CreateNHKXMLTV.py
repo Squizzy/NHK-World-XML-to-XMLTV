@@ -22,6 +22,9 @@ XMLOutFile = 'ConvertedNHK.xml'
 rootURL = "https://www3.nhk.or.jp"
 ChannelIconURL = rootURL + "nhkworld/assets/images/icon_nhkworld_tv.png"
 
+# In case the time offset is incorrect in the XMLTV file, the value below can be modified to adjust it - for example -0100 would change to -1 UTC
+timeOffset = ' +0000'
+
 # Import the .json from the URL
 with urllib.request.urlopen(JsonInURL) as url:
     data = json.load(url)
@@ -101,8 +104,8 @@ for item in nhkimported["channel"]["item"]:
     # construct the program info xml tree
 
     programme = xml.SubElement(root, 'programme')
-    programme.set('start', adj_date(item["pubDate"]) + ' +0000')
-    programme.set('stop', adj_date(item["endDate"]) + ' +0000')
+    programme.set('start', adj_date(item["pubDate"]) + timeOffset)
+    programme.set('stop', adj_date(item["endDate"]) + timeOffset)
     programme.set('channel', 'nhk.world')
 
     progTitle = xml.SubElement(programme, 'title')
