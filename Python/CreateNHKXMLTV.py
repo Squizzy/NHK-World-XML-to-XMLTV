@@ -11,6 +11,8 @@ from datetime import datetime, timezone
 import xml.etree.ElementTree as xml
 import urllib.request
 
+DEBUG = False
+
 # jsonInFile = 'all-json-example.json'
 jsonInFile = 'DownloadedJSON.json'
 # reference for later when pulling off the internet directly:
@@ -27,8 +29,9 @@ timeOffset = ' +0000'
 # Import the .json from the URL
 with urllib.request.urlopen(JsonInURL) as url:
     data = json.load(url)
-with open(jsonInFile, 'w') as jsonfile:
-    json.dump(data, jsonfile)
+if (DEBUG):
+    with open(jsonInFile, 'w') as jsonfile:
+        json.dump(data, jsonfile)
 
 
 # adj_date: convert the unix date with extra 3 "0" to the xmltv date format
@@ -93,9 +96,12 @@ channelDisplayName.text = 'NHK World'
 channelIcon = xml.SubElement(channel, 'icon')
 channelIcon.set('src', ChannelIconURL)
 
-# load the json file from local storage
-with open(jsonInFile, 'r', encoding='utf8') as nhkjson:
-    nhkimported = json.load(nhkjson)
+if (DEBUG):
+    # load the json file from local storage
+    with open(jsonInFile, 'r', encoding='utf8') as nhkjson:
+        nhkimported = json.load(nhkjson)
+else:
+    nhkimported = data
 
 # Go through all items, though only interested in the Programmes information here
 for item in nhkimported["channel"]["item"]:
