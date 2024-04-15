@@ -52,6 +52,7 @@ def indent(elem, level=0):
 genres = {None: "General",
           11: "News",
           12: "Current Affairs",
+          13: "International (13 - to be confirmed)",
           14: "Biz/Tech",
           15: "Documentary",
           16: "Interview",
@@ -69,6 +70,7 @@ genres = {None: "General",
           28: "Learn Japanese",
           29: "Disaster Preparedness",
           30: "Kids", #fxbx: last cat as of 7-20-2023
+          31: "Anime Manga (31 - to be confirmed)"
 }
 
 # Start filling in the table XML tree with content that is useless and might not change
