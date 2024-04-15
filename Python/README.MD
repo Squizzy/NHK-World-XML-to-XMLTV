@@ -8,6 +8,8 @@
 - Linux - not tested yet, but should be same as Mac
 
 # Versions
+15 Apr 2024 - v1.3 (untested) - updated the application so it can detect python version and work with 2.0 or 3.0 - not committed back to master as it is not yet tested
+
 15 Apr 2024 - v1.2 - updated URL as per fxbx update, replaced deprecated utcfromtimestamp(), cleaned up XML tree generation, added some new genres, added timeOffsetVariable
 
 21 Jan 2019 - V1.1 - Windows Executable created using "auto-py-to-exe.exe .\CreateNHKXMLTV.py" (auto-pi-to-exe v2.5.1)\
