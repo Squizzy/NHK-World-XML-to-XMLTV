@@ -1,5 +1,14 @@
-# NHK-World-XML-to-XMLTV
-creating XMLTV file from XML of NHK World
+# Conversion of NHK's EPG in JSON to XMLTV - v1.2
+
+Python version (under Python folder above)
+* Only file "CreateNHKXMLTV.py" is needed (+ Python on the machine on which it is run of course)
+* Requires Python 3.x
+* Runs on Windows, MacOS, Linux
+
+
+# Background info
+NHK-World-XML-to-XMLTV
+* creating XMLTV file from XML of NHK World
 
 Source info.txt
 *  path to the original info, and tools
