@@ -62,12 +62,16 @@ def indent(elem, level=0):
             elem.tail = i
 
 
-# genres values come from NHK network under "genre" to become "category" in xmltv
+# Genres values come from NHK network under "genre" to become "category" in xmltv
+# values can be updated by running additional script: scrape_nhk_genres.py 
+# which retrives them from NHK's website directly and saves the result into "genres.txt" 
+# the content of which can replace the numbered lines below directly.
+# Of note: 24 has been found in the past but might not exist any more.
 genres = {None: "General",
           11: "News",
           12: "Current Affairs",
-          13: "International (13 - to be confirmed)",
-          14: "Biz/Tech",
+          13: "Debate",
+          14: "Biz & Tech",
           15: "Documentary",
           16: "Interview",
           17: "Food",
@@ -84,7 +88,7 @@ genres = {None: "General",
           28: "Learn Japanese",
           29: "Disaster Preparedness",
           30: "Kids", #fxbx: last cat as of 7-20-2023
-          31: "Anime Manga (31 - to be confirmed)"
+          31: "Anime & Manga"
 }
 
 # Start filling in the table XML tree with content that is useless and might not change
