@@ -27,6 +27,7 @@ ChannelIconURL = rootURL + "nhkworld/assets/images/icon_nhkworld_tv.png"
 
 # In case the time offset is incorrect in the XMLTV file, the value below 
 # can be modified to adjust it: For example -0100 would change to -1 UTC
+time_zone = timezone.utc
 timeOffset = ' +0000'
 
 # Import the .json from the URL
@@ -39,7 +40,7 @@ if DEBUG:
 
 ## Replaced deprecated utcfromtimestamp() method
 # def adj_date(u): return datetime.utcfromtimestamp(int(u[:-3])).strftime('%Y%m%d%H%M%S')
-def convert_unix_to_xmltv_date(u):
+def convert_unix_to_xmltv_date(unixTime):
     """ Converts the unit time from NHK to XMLTV time format
 
     Args:
@@ -48,7 +49,7 @@ def convert_unix_to_xmltv_date(u):
     Returns:
         str: Returns the date in XMLTV format required for applications like Kodi.
     """    
-    return datetime.fromtimestamp(int(u[:-3]), tz = timezone.utc).strftime('%Y%m%d%H%M%S')
+    return datetime.fromtimestamp(int(unixTime[:-3]), tz = time_zone).strftime('%Y%m%d%H%M%S')
 
 def add_xml_element(parent, tag, attributes=None, text=None):
     """ Add an XML element to a tree
@@ -114,23 +115,12 @@ genres = {None: "General",
 }
 
 # Start filling in the table XML tree with content that is useless and might not change
-root = xml.Element('tv')
-root.set('source-data-url', JsonInURL)
-root.set('source-info-name', 'NHK World EPG Json')
-root.set('source-info-url', 'https://www3.nhk.or.jp/nhkworld/')
+root = xml.Element('tv', attrib={'source-data-url': JsonInURL, 'source-info-name': 'NHK World EPG Json', 'source-info-url': 'https://www3.nhk.or.jp/nhkworld/'})
 
 channel = add_xml_element(root, 'channel', attributes={'id': 'nhk.world'})
 add_xml_element(channel, 'display-name', text='NHK World')
 add_xml_element(channel, 'icon', attributes={'src': ChannelIconURL})
-#add_xml_element(root, 'channel1', attributes={'id': 'nhk.world'})
-# channel = xml.SubElement(root, 'channel')
-# channel.set('id', 'nhk.world')
-#channelDisplayName = add_xml_element(channel, 'display-name', text='NHK World')
-# channelDisplayName = xml.SubElement(channel, 'display-name')
-# channelDisplayName.text = 'NHK World'
-#channelIcon = add_xml_element(channel, 'icon', attributes={'src': ChannelIconURL})
-# channelIcon = xml.SubElement(channel, 'icon')
-# channelIcon.set('src', ChannelIconURL)
+
 
 if DEBUG:
     # load the json file from local storage
@@ -146,25 +136,12 @@ for item in nhkimported["channel"]["item"]:
     programme = add_xml_element(root, 'programme', attributes={'start': convert_unix_to_xmltv_date(item["pubDate"]) + timeOffset, 
                                                                'stop': convert_unix_to_xmltv_date(item["endDate"]) + timeOffset, 
                                                                'channel':'nhk.world'})
-    # programme1 = xml.SubElement(root, 'programme1')
-    # programme1.set('start', convert_unix_to_xmltv_date(item["pubDate"]) + timeOffset)
-    # programme1.set('stop', convert_unix_to_xmltv_date(item["endDate"]) + timeOffset)
-    # programme1.set('channel', 'nhk.world')
 
-    progTitle = add_xml_element(programme, 'title', attributes={'lang': 'en'}, text=item["title"])
-    # progTitle1 = xml.SubElement(programme1, 'title')
-    # progTitle1.set('lang', 'en')
-    # progTitle1.text = item["title"]
-
-    progTitle = add_xml_element(programme, 'sub-title', attributes={'lang': 'en'}, text=item["subtitle"])
-    # progSub = xml.SubElement(programme, 'sub-title')
-    # progSub.set('lang', 'en')
-    # progSub.text = item["subtitle"]
-
-    progTitle = add_xml_element(programme, 'desc', attributes={'lang': 'en'}, text=item["description"])
-    # progDesc = xml.SubElement(programme, 'desc')
-    # progDesc.set('lang', 'en')
-    # progDesc.text = item["description"]
+    add_xml_element(programme, 'title', attributes={'lang': 'en'}, text=item["title"])
+    add_xml_element(programme, 'sub-title', attributes={'lang': 'en'}, text=item["subtitle"])
+    add_xml_element(programme, 'desc', attributes={'lang': 'en'}, text=item["description"])
+    add_xml_element(programme, 'episode-num', text=item["airingId"])
+    add_xml_element(programme, 'icon', attributes={'src': rootURL + item["thumbnail"]})
 
     genre = item["genre"]["TV"]
     category2 = ""
@@ -178,25 +155,11 @@ for item in nhkimported["channel"]["item"]:
     else:
         category1 = genres[None]
 
-    progCat1 = add_xml_element(programme, 'category', attributes={'lang': 'en'}, text=category1)
-    # progCat1 = xml.SubElement(programme, 'category')
-    # progCat1.set('lang', 'en')
-    # progCat1.text = category1
-
+    add_xml_element(programme, 'category', attributes={'lang': 'en'}, text=category1)
+    
     if category2 != "":
-        progCat2 = add_xml_element(programme, 'category', attributes={'lang': 'en'}, text=category2)
-        # progCat2 = xml.SubElement(programme, 'category')
-        # progCat2.set('lang', 'en')
-        # progCat2.text = category2
-
-    progEpNum = add_xml_element(programme, 'episode-num', text=item["airingId"])
-    # progEpNum = xml.SubElement(programme, 'episode-num')
-    # progEpNum.text = item["airingId"]
-
-    progEpNum = add_xml_element(programme, 'icon', attributes={'src': rootURL + item["thumbnail"]})
-    # progIcon = xml.SubElement(programme, 'icon')
-    # progIcon.set('src', rootURL + item["thumbnail"])
-
+        add_xml_element(programme, 'category', attributes={'lang': 'en'}, text=category2)
+    
 indent(root)
 
 # Export the xml to a local file
