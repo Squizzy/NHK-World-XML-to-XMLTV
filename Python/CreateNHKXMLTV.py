@@ -4,7 +4,7 @@ __copyright__ = "Copyright 2019, Squizzy"
 __credits__ = "The respective websites, and whoever took time to share information\
                  on how to use Python and modules"
 __license__ = "GPL"
-## updated version following changes proposed by fxbx below
+## Refactoring
 __version__ = "1.2"
 __maintainer__ = "Squizzy"
 
@@ -39,8 +39,15 @@ if DEBUG:
 
 ## Replaced deprecated utcfromtimestamp() method
 # def adj_date(u): return datetime.utcfromtimestamp(int(u[:-3])).strftime('%Y%m%d%H%M%S')
-def adj_date(u):
-    """ adj_date: convert the unix date with extra 3 "0" to the xmltv date format """
+def convert_unix_to_xmltv_date(u):
+    """ Converts the unit time from NHK to XMLTV time format
+
+    Args:
+        u (str): Unix time in milliseconds as a string
+
+    Returns:
+        str: Returns the date in XMLTV format required for applications like Kodi.
+    """    
     return datetime.fromtimestamp(int(u[:-3]), tz = timezone.utc).strftime('%Y%m%d%H%M%S')
 
 
@@ -113,8 +120,8 @@ for item in nhkimported["channel"]["item"]:
     # construct the program info xml tree
 
     programme = xml.SubElement(root, 'programme')
-    programme.set('start', adj_date(item["pubDate"]) + timeOffset)
-    programme.set('stop', adj_date(item["endDate"]) + timeOffset)
+    programme.set('start', convert_unix_to_xmltv_date(item["pubDate"]) + timeOffset)
+    programme.set('stop', convert_unix_to_xmltv_date(item["endDate"]) + timeOffset)
     programme.set('channel', 'nhk.world')
 
     progTitle = xml.SubElement(programme, 'title')
