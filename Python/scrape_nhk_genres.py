@@ -13,32 +13,27 @@ def parse_html(url):
         return None
 
 
-
 baseNHKGenresURL = "https://www3.nhk.or.jp/nhkworld/en/shows/category/"
 
-genre = "19"
+# Initiate genres with the None value (used when no genre is provided)
+genres={None: "General"}
 
-urlToProbe = baseNHKGenresURL + genre
+# Download the content of pages baseNHKGrensURL/<number> 
+# where <number> is the genre. 
+# If there is a genre, there is a page, it seems.
+# and extract the genre from the title (Thank you NHK!). 
+# Update the genres dictionary if a page existed
 
-genres=[]
+for genre in range(100):
+    print(genre)
+    soup = parse_html(baseNHKGenresURL + str(genre))
+    if soup:
+        title = soup.find('title').text
+        value =  str((re.findall('Watch (.*) Videos', title)))
+        value = value[2:][:len(value)-4]
+        genres[int(genre)]= value
 
+# Save the formatted version of the dictionar into a file, 
+# ready to be copy/pasted into the NHK XMLTV generator app
 with open('genres.txt', 'w') as f:
-    for genre in range(100):
-        print(genre)
-        soup = parse_html(baseNHKGenresURL + str(genre))
-        if soup:
-            title = soup.find('title').text
-            value =  str((re.findall('Watch (.*) Videos', title)))
-            value = value[2:][:len(value)-4]
-            # genres.append({genre: value})
-            f.write("          " + str(genre) + f': "{value}",\n')        
-    
-# print (genres)
-
-
-    # print("Title of the page:", title)
-    # print("Title of the page:", re.findall('Watch (.*) Videos', title))
-    # Find all 'a' tags
-    # links = soup.find_all('a')
-    # for link in links:
-    #     print(link.get('href'))
+    f.write("genres = " + str(genres).replace(", ", ",\n          ").replace("}", "\n}"))
