@@ -10,40 +10,43 @@ __maintainer__ = "Squizzy"
 import json
 from datetime import datetime, timezone
 import xml.etree.ElementTree as xml
-import urllib.request
+import requests
+import sys
+
 
 # Location of the NHK EPG JSON to be downloaded.
 # This might need occastional updating
-URL_OF_NHK_JSON = "https://nwapi.nhk.jp/nhkworld/epg/v7b/world/all.json"
+URL_OF_NHK_JSON: str = "https://nwapi.nhk.jp/nhkworld/epg/v7b/world/all.json"
 
 # Location of the NHK streams for use in the XMLTV
-URL_OF_NHK_ROOT = "https://www3.nhk.or.jp"
+URL_OF_NHK_ROOT: str = "https://www3.nhk.or.jp"
 
 # Location of the NHK channel icon
-URL_OF_NHK_CHANNEL_ICON = URL_OF_NHK_ROOT + "nhkworld/assets/images/icon_nhkworld_tv.png"
+URL_OF_NHK_CHANNEL_ICON: str = URL_OF_NHK_ROOT + "nhkworld/assets/images/icon_nhkworld_tv.png"
 
 # Name of the file that is created by this application 
 # which contains the XMLTV XML of the NHK EPG
-XMLTV_XML_FILE = 'ConvertedNHK.xml'
+XMLTV_XML_FILE: str = 'ConvertedNHK.xml'
 
 # Downloaded JSON file for tests, or created when DEBUG is on
-DEBUG = False
-TEST_NHK_JSON = 'DownloadedJSON.json'
+DEBUG: bool = False
+TEST_NHK_JSON: str = 'DownloadedJSON.json'
 
 # Local time zone that will be used for the timestamps in the XMLTV file
 # Currently set for UTC as for Continental European use
-TIMEZONE = timezone.utc
+TIMEZONE: timezone = timezone.utc
 
 # In case the time offset is incorrect in the XMLTV file, the value below 
 # can be modified to adjust it: For example -0100 would change to -1 UTC
-TIME_OFFSET = ' +0000'
+TIME_OFFSET: str = ' +0000'
 
 
 # Genres from NHK network
 # Genres are called "category" in XMLTV
 # These should not change too often but can be updated
 # by the output of the scrapping tool Scrape_nhk_Genres.py
-GENRES = {None: "General",
+GENRES: dict[int|None, str] = {
+          None: "General",
           11: "News",
           12: "Current Affairs",
           13: "International (13 - to be confirmed)",
@@ -69,41 +72,48 @@ GENRES = {None: "General",
 
 
 # Import the .json from the URL
-def Import_nhk_epg_json(JsonIn):
+def Import_nhk_epg_json(JsonIn: str) -> dict:
     """Downloads the NHK EPG JSON data from the specified URL and loads it into a variable.
-
     Args:
         JsonInURL (str): URL to download the NHK EPG JSON data.
     """
-    with urllib.request.urlopen(JsonIn) as url:
-        data = json.load(url)
+        
+    response: requests.Response = requests.get(url = JsonIn)
+    
+    if response.status_code == 200:
+        try:
+            data: dict = response.json()
+        except requests.exceptions.JSONDecodeError:
+            print("problem with the parsing of the JSON file downloaded from NHK")
+            sys.exit(1)
+    else:
+        print("Problem with the URL to the NHK JSON file provided ")
+        sys.exit(1)
         
     return data
 
-def Convert_unix_to_xmltv_date(unixTime):
-    """ Converts the unit time from NHK to XMLTV time format
 
+def Convert_unix_to_xmltv_date(unixTime: str) -> str:
+    """ Converts the unit time from NHK to XMLTV time format
     Args:
         u (str): Unix time in milliseconds as a string
-
     Returns:
         str: Returns the date in XMLTV format required for applications like Kodi.
     """    
     return datetime.fromtimestamp(int(unixTime[:-3]), tz = TIMEZONE).strftime('%Y%m%d%H%M%S')
 
-def Add_xml_element(parent, tag, attributes=None, text=None):
-    """ Add an XML element to a tree
 
+def Add_xml_element(parent: xml.Element, tag: str, attributes:dict[str,str]|None=None, text:str|None=None) -> xml.Element:
+    """ Add an XML element to a tree
     Args:
         parent (xml.Element): The parent node in the XML tree
         tag (str): The name of the XML tag to be added.
         attributes (dict, optional): Dictionary of attributes for the XML tag. Defaults to None.
         text (str, optional): The text content for the XML element. Defaults to None.
-
     Returns:
         xml.Element: the XML node created
     """
-    element = xml.SubElement(parent, tag)
+    element: xml.Element = xml.SubElement(parent, tag)
     if attributes:
         for key, value in attributes.items():
             element.set(key, value)
@@ -111,10 +121,11 @@ def Add_xml_element(parent, tag, attributes=None, text=None):
         element.text = text
     return element
 
-def Xml_beautify(elem, level=0):
+
+def Xml_beautify(elem:xml.Element, level:int=0) -> bool:
     """ indent: beautify the xml to be output, rather than having it stay on one line
         Origin: http://effbot.org/zone/element-lib.htm#prettyprint """
-    i = "\n" + level * "\t"
+    i:str = "\n" + level * "\t"
     if len(elem):
         if not elem.text or not elem.text.strip():
             elem.text = i + "\t"
@@ -129,7 +140,8 @@ def Xml_beautify(elem, level=0):
             elem.tail = i
     return True
 
-def Generate_xmltv_xml(nhkimported):
+
+def Generate_xmltv_xml(nhkimported: dict) -> xml.Element:
     """Generates the XMLTV XML tree from the NHK JSON EPG data
 
     Args:
@@ -139,7 +151,12 @@ def Generate_xmltv_xml(nhkimported):
         root (xml.tree): the XML tree created
     """
     # Start filling in the table XML tree with content that is useless and might not change
-    root = xml.Element('tv', attrib={'source-data-url': URL_OF_NHK_JSON, 'source-info-name': 'NHK World EPG Json', 'source-info-url': 'https://www3.nhk.or.jp/nhkworld/'})
+    root: xml.Element = xml.Element(
+                            'tv', 
+                            attrib={
+                                'source-data-url': URL_OF_NHK_JSON, 
+                                'source-info-name': 'NHK World EPG Json', 
+                                'source-info-url': 'https://www3.nhk.or.jp/nhkworld/'})
 
     channel = Add_xml_element(root, 'channel', attributes={'id': 'nhk.world'})
     Add_xml_element(channel, 'display-name', text='NHK World')
@@ -149,9 +166,12 @@ def Generate_xmltv_xml(nhkimported):
     for item in nhkimported["channel"]["item"]:
 
         # construct the program info xml tree
-        programme = Add_xml_element(root, 'programme', attributes={'start': Convert_unix_to_xmltv_date(item["pubDate"]) + TIME_OFFSET, 
-                                                                'stop': Convert_unix_to_xmltv_date(item["endDate"]) + TIME_OFFSET, 
-                                                                'channel':'nhk.world'})
+        programme: xml.Element = Add_xml_element(
+                                    root, 
+                                    'programme', 
+                                    attributes={'start': Convert_unix_to_xmltv_date(item["pubDate"]) + TIME_OFFSET, 
+                                                'stop': Convert_unix_to_xmltv_date(item["endDate"]) + TIME_OFFSET, 
+                                                'channel':'nhk.world'})
 
         Add_xml_element(programme, 'title', attributes={'lang': 'en'}, text=item["title"])
         Add_xml_element(programme, 'sub-title', attributes={'lang': 'en'}, text=item["subtitle"])
@@ -159,8 +179,9 @@ def Generate_xmltv_xml(nhkimported):
         Add_xml_element(programme, 'episode-num', text=item["airingId"])
         Add_xml_element(programme, 'icon', attributes={'src': URL_OF_NHK_ROOT + item["thumbnail"]})
 
-        genre = item["genre"]["TV"]
-        category2 = ""
+        genre: str = item["genre"]["TV"]
+        category1: str = ""
+        category2: str = ""
         if genre == "":
             category1 = GENRES[None]
         elif isinstance(genre, str):
@@ -176,41 +197,43 @@ def Generate_xmltv_xml(nhkimported):
         if category2 != "":
             Add_xml_element(programme, 'category', attributes={'lang': 'en'}, text=category2)
         
-    Xml_beautify(root)
+    if not Xml_beautify(root):
+        print("Problem beautifying the XML")
+        sys.exit(1)
     
     return root
 
-def Save_xmltv_xml_to_file(root):
+
+def Save_xmltv_xml_to_file(root: xml.Element) -> bool:
     """Store the XML tree to a file
 
     Args:
         root (_type_): The XMLTV XML tree to store to file
     """
     # Export the xml to a local file
-    tree = xml.ElementTree(root)
+    tree:xml.ElementTree = xml.ElementTree(root)
     with open(XMLTV_XML_FILE, 'w+b') as outFile:
         tree.write(outFile)
         
     return True
 
 
-def main():
+def main() -> int:
     """Main application
-
     Returns:
         0: Successful execution
     """
-    JSON_DATA = Import_nhk_epg_json(URL_OF_NHK_JSON)
+    json_data: dict = Import_nhk_epg_json(URL_OF_NHK_JSON)
     
     if DEBUG:
         with open(TEST_NHK_JSON, 'w', encoding="utf-8") as jsonfile:
-            json.dump(JSON_DATA, jsonfile)
+            json.dump(json_data, jsonfile)
     if DEBUG:
         # load the json file from local storage
         with open(TEST_NHK_JSON, 'r', encoding='utf8') as nhkjson:
-            JSON_DATA = json.load(nhkjson)    
+            json_data = json.load(nhkjson)    
 
-    XmltvXml = Generate_xmltv_xml(JSON_DATA)
+    XmltvXml: xml.Element = Generate_xmltv_xml(json_data)
     
     Save_xmltv_xml_to_file(XmltvXml)
     
