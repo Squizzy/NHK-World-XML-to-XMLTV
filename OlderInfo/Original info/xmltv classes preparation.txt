@@ -1,0 +1,158 @@
+class tvOutXML {
+  var source-info-url:String="http://www.schedulesdirect.org/"
+  var source-info-name:String="Schedules Direct"
+  var generator-info-name:String="XMLTV/$Id: Badeendje,v 0.01 2017/02/06 15:21:41 rmeden Exp $"
+  var generator-info-url:String="http://www.xmltv.org/"
+  var channel:channelOutXML[]?
+  var programme:programmeOutXML[]?
+}
+
+class channelOutXML {
+  var id:String?
+  var display-name:String?
+  var icon:String?
+}
+
+class iconoutXML {
+  var src:String?
+}
+
+class programmeOutXML {
+  var title:titleOutXML[]?
+  var desc:descOutXML[]?
+  var date:Double?
+  var category:categoryOutXML[]?
+  var episode:episodenumOutXML[]?
+  var audio:audioOutXML[]?
+  var previouslyShown: prevshownOutXML[]?
+  var subtitlesOutXML[]?
+  var ratingOutXML[]?
+}
+
+class titleOutXML {
+  var lang:String="en"
+  var title-text:String?
+}
+
+class descOutXML {
+  var lang:String="en"
+  var desc-text:String?
+}
+
+class categoryOutXML {
+  var lang:String="en"
+  var category-text:String?
+}
+
+class episodenumOutXML {
+  var episodenumsystem:String="en"
+  var episodenum-text:String?
+}
+
+class audioOutXML {
+  var stereo:String?
+}
+
+class prevshownOutXML {
+  var start:String?
+}
+
+class subtitlesOutXML {
+  var type:String?
+}
+
+
+class ratingOutXML {
+  var system:String?
+  var value:String?
+}
+
+==============
+
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv 
+    source-info-url="http://www.schedulesdirect.org/" 
+    source-info-name="Schedules Direct" 
+    generator-info-name="XMLTV/$Id: tv_grab_na_dd.in,v 1.70 2008/03/03 15:21:41 rmeden Exp $" g
+    enerator-info-url="http://www.xmltv.org/">
+
+  <channel 
+      id="I10436.labs.zap2it.com">
+    <display-name>13 KERA</display-name>
+    <icon 
+        src="file://C:\Perl\site/share/xmltv/icons/KERA.gif" />
+  </channel>
+
+  <programme start="20080715003000 -0600" stop="20080715010000 -0600" channel="I10436.labs.zap2it.com">
+    <title 
+        lang="en">NOW on PBS</title>
+
+    <desc 
+        lang="en">Jordan's Queen Rania has made job creation a priority to help curb the staggering unemployment rates among youths in the Middle East.</desc>
+    <date>20080711</date>
+    <category lang="en">Newsmagazine</category>
+    <category lang="en">Interview</category>
+    <category lang="en">Public affairs</category>
+    <category lang="en">Series</category>
+    <episode-num 
+        system="dd_progid">EP01006886.0028</episode-num>
+    <episode-num 
+        system="onscreen">427</episode-num>
+    <audio>
+      <stereo>stereo</stereo>
+    </audio>
+    <previously-shown start="20080711000000" />
+    <subtitles type="teletext" />
+    <rating 
+        system="VCHIP">
+      <value>TV-14</value>
+    </rating>
+  </programme>
+
+===============
+The structure that is really created by the tables above:
+
+
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE tv SYSTEM "xmltv.dtd">
+
+<tv
+    <source-info-url>="http://www.schedulesdirect.org/"
+    <source-info-name>="Schedules Direct"
+    <generator-info-name>="XMLTV/$Id: tv_grab_na_dd.in,v 1.70 2008/03/03 15:21:41 rmeden Exp $"
+    <generator-info-url>="http://www.xmltv.org/">
+    <channel
+        <id>="I10436.labs.zap2it.com">
+        <display-name>13 KERA</display-name>
+        <icon
+            <src>="file://C:\Perl\site/share/xmltv/icons/KERA.gif" />
+    </channel>
+    <programme
+        <start>="20080715003000 -0600"
+        <stop>="20080715010000 -0600"
+        <channel>="I10436.labs.zap2it.com">
+        <title
+            <lang>="en">
+            <title-text>NOW on PBS</title>
+        <desc
+            <lang>="en">
+            <desc-text>Jordan's Queen Rania has made job creation a priority to help curb the staggering unemployment rates among youths in the Middle East.</desc>
+            <date>20080711</date>
+            <category
+                <lang>="en">
+                <category-text>Newsmagazine</category><category lang="en">Interview</category><category lang="en">Public affairs</category><category lang="en">Series</category>
+            <episode-num
+                <system>="dd_progid">
+                <episode-num-text>EP01006886.0028</episode-num><episode-num system="onscreen">427</episode-num>
+            <audio>
+                <stereo>stereo</stereo></audio>
+            <previously-shown
+                <start>="20080711000000" />
+            <subtitles>
+                <type>="teletext" />
+            <rating
+                <system>"VCHIP">
+                <value>TV-14</value></rating>
+</programme>

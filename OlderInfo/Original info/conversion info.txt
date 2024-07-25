@@ -1,0 +1,102 @@
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<tv source-data-url="https://api.nhk.or.jp/nhkworld/epg/v6/world/all.json?apikey=EJfK8jdS57GqlupFgAfAAwr573q01y6k" source-info-name=“NHK World EPG Json“ source-info-url="https://www3.nhk.or.jp/nhkworld/">
+
+<channel id=“nhk.world”>
+	<display-name>NHK World</display-name>
+	<icon src="https://www3.nhk.or.jp/nhkworld/assets/images/icon_nhkworld_tv.png" />
+</channel>
+
+<programme start=“YYYYMMDDHHMMSS +0000" stop=“YYYYMMDDHHMMSS +0000" channel=“nhk.world”>
+	<title lang=“en”>X</title>
+	<sub-title lang=“en”>X</sub title>
+	<desc lang=“en”>X</desc>
+	<category lang=“en”>X1</category>
+	<category lang=“en”>X2</category>
+	<episode-num>X</episode-num>
+	<previously-shown start=“YYYYMMDDHHMMSS” />
+	<icon src=”Link” />
+</programme>
+
+
+
+
+
+Json -> xml
+
+Title -> title
+subtitle -> sub-title
+Description -> desc
+Genre, convert the numbers below to -> category
+AiringID -> episode-num
+Pubdate -> previously-shown start
+Thumbnail non S -> icon src
+
+Genre tags:
+
+NONE -> education/science/factual topics (general)
+TV 11 -> News -> news/weather report
+TV 12 -> Current Affairs -> news magazine
+TV 14 -> Biz/Tech -> technology/natural science
+TV 15 -> Documentary -> documentary
+TV 16 -> Interview -> discussion/interview/debate
+TV 17 -> Food -> cooking
+TV 18 -> Travel -> tourism/travel
+TV 19 -> Art & Design -> arts/culture magazine
+TV 20 -> Culture & Lifestyle -> leisure hobbies (general)
+TV 21 -> Entertainment -> popular culture/traditional arts
+TV 22 -> Pop Culture & Fashion -> fashion
+TV 23 -> Science & Nature -> education/science/factual topics (general)
+TV 24 -> Documentary -> discussion/interview/debate
+TV 25 -> Sports -> sports magazine
+
+
+Link
+
+/nhkworld/upld/thumbnails/en/tv/regular_program/newsline_2016.jpg
+
+Becomes
+
+https://www3.nhk.or.jp/nhkworld/upld/thumbnails/en/tv/regular_program/newsline_2016.jpg
+
+forget about the <previously-shown start=""> tag
+there's Pubdate and Enddate if I remember correctly
+beginning and ending times
+have to look up but I believe the end time ahs the be the same as the next program minus 1 sec
+rest should be the same
+
+
+======
+
+Xml review
+
+
+[13:52:22]  <Badeendje>    line 5, channel id
+[14:33:16]
+[13:52:43]  <Badeendje>    you use some channel id to match with a m3u list for example
+[14:33:17]
+[13:52:57]  <Badeendje>    can't use spaces, where a space would be you usually use a dot
+[14:33:18]
+[13:53:04]  <Badeendje>    so probably nhk.world.tv
+[14:33:19]
+[13:53:42]  <Badeendje>    line 9, channel id has to match
+[14:33:20]
+[13:54:28]  <Badeendje>    pubdate and enddate form the time progression indeed
+[14:33:21]
+[13:55:09]  <Badeendje>    line 10 title looks ok
+[14:33:22]
+[13:55:18]  <Badeendje>    it's basically the episode title or name
+[14:33:23]
+[13:55:53]  <Badeendje>    line 12 pubdate I'm not sure if that gets passed on, the vod info does
+[14:33:24]
+[13:55:59]  <Badeendje>    it's the original date of airing
+[14:33:25]
+[14:00:26]  <Badeendje>    line 17 not sure
+[14:33:26]
+[14:00:33]  <Badeendje>    find that number hard to relate
+[14:33:27]
+[14:00:45]  <Badeendje>    it basically just says what series it is but in a number
+[14:33:28]
+[14:01:02]  <Badeendje>    haven't seen a rating in the data?
+[14:33:29]
+[14:01:10]  <Badeendje>    line 25

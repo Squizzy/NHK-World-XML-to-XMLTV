@@ -1,0 +1,26 @@
+<channel>
+	<item>
+		<seriesId>1001</seriesId>
+		<airingId>632</airingId>
+		<title>NHK NEWSLINE</title>
+		<description>NHK NEWSLINE delivers the latest news, business, and weather every hour with stories and analysis from Japan, the rest of Asia, and around the world.</description>
+		<link>/nhkworld/en/news/</link>
+		<pubDate>1485702000000</pubDate>
+		<jstrm>1</jstrm>
+		<wstrm>1</wstrm>
+		<vodReserved>false</vodReserved>
+		<endDate>1485702600000</endDate>
+		<subtitle>		</subtitle>
+		<content>		</content>
+		<content_clean>		</content_clean>
+		<thumbnail>/nhkworld/upld/thumbnails/en/tv/regular_program/newsline_2016.jpg</thumbnail>
+		<thumbnail_s>/nhkworld/upld/thumbnails/en/tv/regular_program/newsline_2016_s.jpg</thumbnail_s>
+		<showlist>1</showlist>
+		<internal>0</internal>
+		<genre>
+			<TV>11</TV>
+			<Top/>
+			<LC/>
+		</genre>
+		<analytics>[nhkworld]w02,001;1001-632-2017;NHK NEWSLINE;NotSpecified;en</analytics>
+	</item>
