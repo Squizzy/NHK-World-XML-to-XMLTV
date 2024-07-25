@@ -8,13 +8,17 @@ __maintainer__ = "Squizzy"
 
 import sys
 import json
-from datetime import datetime, timezone
+from datetime import datetime
 import xml.etree.ElementTree as xml
 if sys.version_info[0] < 3:
     # for use with Python 2.7 on libreelec
     import urllib
+    import pytz as timezone
+    from io import open
 else:
+    # Python3
     import urllib.request
+    from datetime import timezone
 
 DEBUG = False
 
@@ -46,6 +50,7 @@ else:
 # adj_date: convert the unix date with extra 3 "0" to the xmltv date format
 ## Replaced deprecated utcfromtimestamp() method
 # def adj_date(u): return datetime.utcfromtimestamp(int(u[:-3])).strftime('%Y%m%d%H%M%S')
+# def adj_date(u): return datetime.fromtimestamp(int(u[:-3]), tz = timezone.utc).strftime('%Y%m%d%H%M%S')
 def adj_date(u): return datetime.fromtimestamp(int(u[:-3]), tz = timezone.utc).strftime('%Y%m%d%H%M%S')
 
 
