@@ -3,3 +3,9 @@ DownloadedJSON.json
 ConvertedNHK-newref.xml
 ConvertedNHK-ref.xml
 CreateNHKXMLTV - refactor1.py
+settings.json
+.vscode/
+.mypy_cache/
+venv312/
+venv2718/
+OlderInfo/.idea/
