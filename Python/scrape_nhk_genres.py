@@ -1,5 +1,30 @@
-import requests, re
+""" Python application to convert NHK EPG in JSON into XMLTV standard"""
+__author__ = "Squizzy"
+__copyright__ = "Copyright 2019-now, Squizzy"
+__credits__ = "The respective websites, and whoever took time to share information\
+                 on how to use Python and modules"
+__license__ = "GPL"
+## updated version following changes proposed by fxbx below
+__version__ = "1.0"
+__maintainer__ = "Squizzy"
+
+
+import requests
+import re
 from bs4 import BeautifulSoup
+
+
+
+# Location of where the NHK categories could be found (at the time of the creation of this file)
+baseNHKGenresURL = "https://www3.nhk.or.jp/nhkworld/en/shows/category/"
+
+# Type hint then initiate genres with the None value (used when no genre is provided)
+genres: dict[int|None, str]
+
+genres = {
+    None: "General"
+    }
+
 
 def parse_html(url):
     """Fetches content from a URL and parses it with BeautifulSoup."""
@@ -12,11 +37,6 @@ def parse_html(url):
         print(f"Failed to retrieve the webpage: status code {response.status_code}")
         return None
 
-
-baseNHKGenresURL = "https://www3.nhk.or.jp/nhkworld/en/shows/category/"
-
-# Initiate genres with the None value (used when no genre is provided)
-genres={None: "General"}
 
 # Download the content of pages baseNHKGrensURL/<number> 
 # where <number> is the genre. 
