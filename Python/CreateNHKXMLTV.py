@@ -130,7 +130,7 @@ for item in nhkimported["channel"]["item"]:
 
     progSub = xml.SubElement(programme, 'sub-title')
     progSub.set('lang', 'en')
-    progSub.text = item["subtitle"]
+    progSub.text = item["subtitle"] if item["subtitle"] else item["airingId"]
 
     progDesc = xml.SubElement(programme, 'desc')
     progDesc.set('lang', 'en')
