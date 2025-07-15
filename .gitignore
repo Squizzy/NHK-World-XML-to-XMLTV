@@ -1,2 +1,6 @@
 ConvertedNHK.xml
 DownloadedJSON.json
+OlderInfo/
+.vscode/
+.mypy*/
+venv*/
