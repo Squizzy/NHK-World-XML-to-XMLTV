@@ -120,23 +120,32 @@ The same procedure as above but:
 NHK World is a Japanese television channel that broadcasts a wide range of programming, including news, sports, and entertainment.
 This is information that was collected from different sources.
 
-NHK-World-XML-to-XMLTV
-* creating XMLTV file from XML of NHK World
+## History
 
-Source info.txt
-*  path to the original info, and tools
-  
-all-json-example.json
-*  Save of NHKWorld file with .json used
-  
-all-xml-example-from-using-url.xml
-*  save of NHKWorld file with .XML used
-  
-convertjson.xml
-*  json extracted from the URL converted with the online tool
-  
-source XML data to transform.xml
-*   Unitary source of data to transform
-   
-NHK World XML to XMLTV converter
-*  Path to the XCode CLI file to do the conversion
+20250715 - v1.4
+    - Merged refactored Python3 version of CreateNHKXMLTV.py into master branch.
+    - Corrected requirement.txt -> requirements.txt .
+
+20240502 - v1.3
+    - Version change to represent the refactored Python3 version of CreateNHKXMLTV.py in its devel branch.
+
+20240415 - v1.2
+    - Version change to represent the improvements suggested by external contributor (fxbx) related to the URL for the NHK world EPG JSON
+
+20190120 - v1.1
+    - changed to pulling the file from URL
+
+v1.0.5
+    - add second category (genre) for channels which have it
+
+v1.0.4
+    - bug fix on icon src xml output and changed the tag to all lower case
+
+v1.0.3
+    - Headers from v1.0.1, licence, URL reference added for later
+
+v1.0.2
+    - Tidy up from v1.0
+
+v1.0.0
+    - First working version

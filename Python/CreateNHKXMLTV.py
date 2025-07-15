@@ -1,10 +1,10 @@
 """ Python application to convert NHK EPG in JSON into XMLTV standard"""
 __author__ = "Squizzy"
-__copyright__ = "Copyright 2019, Squizzy"
+__copyright__ = "Copyright 2019-now, Squizzy"
 __credits__ = "The respective websites, and whoever took time to share information\
                  on how to use Python and modules"
 __license__ = "GPL"
-__version__ = "1.3" # Python-3 only
+__version__ = "1.4" # Python-3 only
 __maintainer__ = "Squizzy"
 
 import json
