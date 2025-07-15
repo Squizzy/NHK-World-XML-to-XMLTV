@@ -2,5 +2,5 @@ ConvertedNHK.xml
 DownloadedJSON.json
 venv*/
 .vscode
-Python/.idea/
+OlderInfo/
 .mypy*/
