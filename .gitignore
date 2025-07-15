@@ -1,6 +1,10 @@
 ConvertedNHK.xml
 DownloadedJSON.json
-OlderInfo/
+ConvertedNHK-newref.xml
+ConvertedNHK-ref.xml
+CreateNHKXMLTV - refactor1.py
+settings.json
 .vscode/
 .mypy*/
 venv*/
+OlderInfo/
