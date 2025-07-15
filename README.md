@@ -4,6 +4,8 @@
 - Converts it to an XMLTV file
 - Outputs the XMLTV file to the current directory
 
+- A python 3.x and a separate python 2.7 versions are available
+
 ## How to run the script
 
 ### Python3
@@ -83,9 +85,9 @@ Two files are needed: CreateNHKXMLTV.py and requirements.txt.
 
 5. The XMLTV file created is saved in the same folder as `ConvertedNHK.xml`.
 
-### Python v2
+### Python2
 
-the __p2__ branch of this repository contains the python v2 version, as per dazzhk implementation.  
+the __p2__ branch of this repository contains the python v2 version, as per external contributor dazzhk recommendation.  
 it is not merged into master yet as it is not tested.
 
 The same procedure as above but:  
@@ -120,7 +122,10 @@ The same procedure as above but:
 NHK World is a Japanese television channel that broadcasts a wide range of programming, including news, sports, and entertainment.
 This is information that was collected from different sources.
 
-## History
+## Note:
+All other files in this repository have no value and are only here for historical reason (until they are removed)
+
+## Version history
 
 20250715 - v1.4
     - Merged refactored Python3 version of CreateNHKXMLTV.py into master branch.
@@ -130,22 +135,30 @@ This is information that was collected from different sources.
     - Version change to represent the refactored Python3 version of CreateNHKXMLTV.py in its devel branch.
 
 20240415 - v1.2
-    - Version change to represent the improvements suggested by external contributor (fxbx) related to the URL for the NHK world EPG JSON
+    - updated the URL for the NHK world EPG JSON as per external contributor fxbx recommendation
+    - replaced deprecated utcfromtimestamp(), added timeOffsetVariable
+    - cleaned up XML tree generation
+    - added some new genres
 
 20190120 - v1.1
     - changed to pulling the file from URL
+    - windows executable created using "auto-py-to-exe.exe .\CreateNHKXMLTV.py" (auto-pi-to-exe v2.5.1)\
+      File to be found under "output" folder. Not virus checked.
 
-v1.0.5
+20190119 - v1.0.5
     - add second category (genre) for channels which have it
 
-v1.0.4
-    - bug fix on icon src xml output and changed the tag to all lower case
+20190119 - v1.0.4
+    - corrected \<category\> (genre) to use all lowercase
 
-v1.0.3
-    - Headers from v1.0.1, licence, URL reference added for later
+20190119 - v1.0.3
+    - corrected \<Icon\> typo source xml
 
-v1.0.2
-    - Tidy up from v1.0
+20190119 - v1.0.2
+    - added header, version, licence, and reference URL for later
 
-v1.0.0
-    - First working version
+19 Jan 2019 - v1.0.1
+    - Some tidying up
+
+20190119 - v1.0
+    - First release as working version
