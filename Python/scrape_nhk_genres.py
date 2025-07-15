@@ -12,7 +12,7 @@ __maintainer__ = "Squizzy"
 
 import requests
 import re
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup # type: ignore
 
 
 # Download the content of pages baseNHKGrensURL/<number> 
