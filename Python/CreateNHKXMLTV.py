@@ -174,7 +174,7 @@ def Generate_xmltv_xml(nhkimported: dict) -> xml.Element:
                                                 'channel':'nhk.world'})
 
         Add_xml_element(programme, 'title', attributes={'lang': 'en'}, text=item["title"])
-        Add_xml_element(programme, 'sub-title', attributes={'lang': 'en'}, text=item["subtitle"] if item["subtitle"] else item["airingID"])
+        Add_xml_element(programme, 'sub-title', attributes={'lang': 'en'}, text=item["subtitle"] if item["subtitle"] else item["airingId"])
         Add_xml_element(programme, 'desc', attributes={'lang': 'en'}, text=item["description"])
         Add_xml_element(programme, 'episode-num', text=item["airingId"])
         Add_xml_element(programme, 'icon', attributes={'src': URL_OF_NHK_ROOT + item["thumbnail"]})
@@ -228,7 +228,7 @@ def main() -> int:
     if DEBUG:
         with open(TEST_NHK_JSON, 'w', encoding="utf-8") as jsonfile:
             json.dump(json_data, jsonfile)
-    if DEBUG:
+            
         # load the json file from local storage
         with open(TEST_NHK_JSON, 'r', encoding='utf8') as nhkjson:
             json_data = json.load(nhkjson)    
