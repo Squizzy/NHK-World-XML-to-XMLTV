@@ -3,8 +3,8 @@ __author__ = "Squizzy"
 __copyright__ = "Copyright 2019-now, Squizzy"
 __credits__ = "The respective websites, and whoever took time to share information\
                  on how to use Python and modules"
-__license__ = "GPL"
-__version__ = "1.4" # Python-3 only
+__license__ = "GPLv2"
+__version__ = "1.5" # Python-3 only
 __maintainer__ = "Squizzy"
 
 import json
@@ -42,6 +42,13 @@ TIME_OFFSET: str = ' +0000'
 
 
 # Genres from NHK network
+
+# Genres values come from NHK network under "genre" to become "category" in xmltv
+# values can be updated by running additional script: scrape_nhk_genres.py 
+# which retrives them from NHK's website directly and saves the result into "genres.txt" 
+# the content of which can replace the numbered lines below directly.
+# Of note: 24 has been found in the past but might not exist any more.
+
 # Genres are called "category" in XMLTV
 # These should not change too often but can be updated
 # by the output of the scrapping tool Scrape_nhk_Genres.py
@@ -86,10 +93,21 @@ def Import_nhk_epg_json(JsonIn: str) -> dict:
         except requests.exceptions.JSONDecodeError:
             print("problem with the parsing of the JSON file downloaded from NHK")
             sys.exit(1)
-    else:
-        print("Problem with the URL to the NHK JSON file provided ")
+    
+    elif response.status_code == 404:
+        print(f"Network error {response.status_code}: The NHK file containing the EPG JSON does not exist at the URL provided")
         sys.exit(1)
         
+    elif response.status_code == 403:
+        print(f"Network error {response.status_code}: The NHK EPG JSON file exists but NHK rejects the request - try again later")
+        sys.exit(1)
+    
+    else:
+        print(f"Network error {response.status_code}: Problem with the URL to the NHK JSON file provided")
+        sys.exit(1)
+    
+    print("NHK World EPG JSON file downloaded successfully")
+    
     return data
 
 
@@ -201,6 +219,8 @@ def Generate_xmltv_xml(nhkimported: dict) -> xml.Element:
         print("Problem beautifying the XML")
         sys.exit(1)
     
+    print("NHK WORLD EPG data converted to XMLTV standard")
+    
     return root
 
 
@@ -214,7 +234,8 @@ def Save_xmltv_xml_to_file(root: xml.Element) -> bool:
     tree:xml.ElementTree = xml.ElementTree(root)
     with open(XMLTV_XML_FILE, 'w+b') as outFile:
         tree.write(outFile)
-        
+    
+    print(f"{XMLTV_XML_FILE} created successfully")
     return True
 
 
