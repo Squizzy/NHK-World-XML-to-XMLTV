@@ -1,12 +1,32 @@
-# NHK World EPG to XMLTV converter
+# NHK EPG to XMLTV converter
 
-- Extracts NHK World's EPG in JSON from its website
-- Converts it to an XMLTV file
-- Outputs the XMLTV file to the current directory
+## From
 
-- A python 3.x and a separate python 2.7 versions are available
+![NHK JSON](./nhk_json.png)
 
-## How to run the script
+## To
+
+![NHK XMLTV](./nhk_xmltv.png)
+  
+## The applications
+
+- __`CreateNHKXMLTV.py`__
+
+    Extracts NHK's EPG in JSON from its website  
+    Converts it to an XMLTV file  
+    Saves the XMLTV to a text file: `ConvertedNHK.xml`  
+  
+    A python 3.x and a separate python 2.7 versions are available  
+  
+- __`scrape_nhk_genres.py`__  
+
+    NHK genres scraping application identify the genres NHK defined.  
+    Saves the genres to a text file: `genres.txt`  
+    This can be copied and pasted over (but currently isn't) into `CreateNHKXMLTV.py`  
+  
+    A python 3.x only version is available
+
+## How to run the application which converts the EPG to XMLTV: `CreateNHKXMLTV`
 
 ### Python3
 
@@ -21,7 +41,7 @@ Two files are needed: CreateNHKXMLTV.py and requirements.txt.
     > MacOS: run Terminal (Terminal.app)  
     > Linux: run Terminal (Terminal)
 
-    Navigate to your preferred location then create the folder, eg:
+    Navigate to your preferred location then create the folder, e.g.:
 
     ```shell
     mkdir NHK-World-EPG-XMLTV-Extractor
@@ -77,22 +97,25 @@ Two files are needed: CreateNHKXMLTV.py and requirements.txt.
 
     This is now ready to run.
 
-4. Execute the script
+4. Launch
 
     ```shell
     python CreateNHKXMLTV.py
     ```
 
-5. The XMLTV file created is saved in the same folder as `ConvertedNHK.xml`.
+5. The XMLTV is saved in the file `ConvertedNHK.xml`.
 
 ### Python2
 
 the __p2__ branch of this repository contains the python v2 version, as per external contributor dazzhk recommendation.  
 it is not merged into master yet as it is not tested.
+The same procedure as above.
+  
+However different files are currently needed
 
-The same procedure as above but:  
+1. Same as above.
 
-1. different files are currently needed (Section 2. of Python3 abobe):
+2. Download the required files from there repository (Section 2. of Python3 abobe):
 
     - Either direct from here (place the files in the folder created earlier):
 
@@ -109,23 +132,63 @@ The same procedure as above but:
     curl -O https://github.com/Squizzy/NHK-World-XML-to-XMLTV/blob/p2/Python/requirements.txt
     ```
 
-2. Python2 executable needs to be used to create the virtual environment (first step of section 3. of Python3 above):
+3. Set up the environment.
 
-    ```shell
-    python3 -m venv venv
-    ```
+    1. the virtual environment must be for python2
 
-3. Same procedure as above after these two substitutions have been done.
+        >Note: the first `venv` below represent the application executed to create the virtual environment and the second the name of the folder it is created in. If trying to compile with python 3 and python 2.7, the second `venv` could be called venv2.7 for example. This folder name would need to be used in step 2 of this section.
+
+        ```shell
+        python2 -m venv venv
+        ```
+
+    2. same as above
+
+    3. same as above
+
+4. Same as above.
+
+5. Same as above.
+
+## How to run the application which recovers the genres NHK support
+
+### NHK genres scraper: `scrape_nhk_genres.py`
+
+Downloads the list of genres from the NHK World website (different URL from EPG)
+attempts to extract genres as NHK defines them.
+Saves the result into a text file, `genres.txt`.
+The content of this text file can be copied and pasted into the create `CreateNHKXMLTV.py` file before it is run so the latest genres can be applied.
+
+### Requirements
+
+- Python 3.x. (python v2 not yet available)
+- its modules dependencies are included in the requirements.txt file so no need to re-run it.
+
+### Launch
+
+```shell
+python3 scrape_nhk_genres.py
+```
+
+Runs on Windows, MacOS, Linux.  
 
 ## Background info
 
 NHK World is a Japanese television channel that broadcasts a wide range of programming, including news, sports, and entertainment.
 This is information that was collected from different sources.
 
-## Note:
-All other files in this repository have no value and are only here for historical reason (until they are removed)
+## Note
+
+All other files in this repository have no value and are only here mostly for historical reason (until they are removed)
 
 ## Version history
+
+### CreateNHKXMLTV.py
+
+20250715 - v1.5
+    - Error checking on NHK URL access added for feedback
+    - Progress feedback of application execution
+    - Changed to GPLv2 license
 
 20250715 - v1.4
     - Merged refactored Python3 version of CreateNHKXMLTV.py into master branch.
@@ -135,27 +198,27 @@ All other files in this repository have no value and are only here for historica
     - Version change to represent the refactored Python3 version of CreateNHKXMLTV.py in its devel branch.
 
 20240415 - v1.2
-    - updated the URL for the NHK world EPG JSON as per external contributor fxbx recommendation
-    - replaced deprecated utcfromtimestamp(), added timeOffsetVariable
-    - cleaned up XML tree generation
-    - added some new genres
+    - Updated the URL for the NHK world EPG JSON as per external contributor fxbx recommendation
+    - Replaced deprecated utcfromtimestamp(), added timeOffsetVariable
+    - Cleaned up XML tree generation
+    - Added some new genres
 
 20190120 - v1.1
-    - changed to pulling the file from URL
-    - windows executable created using "auto-py-to-exe.exe .\CreateNHKXMLTV.py" (auto-pi-to-exe v2.5.1)\
+    - Changed to pulling the file from URL
+    - Windows executable created using "auto-py-to-exe.exe .\CreateNHKXMLTV.py" (auto-pi-to-exe v2.5.1)\
       File to be found under "output" folder. Not virus checked.
 
 20190119 - v1.0.5
-    - add second category (genre) for channels which have it
+    - Added second category (genre) for channels which have it
 
 20190119 - v1.0.4
-    - corrected \<category\> (genre) to use all lowercase
+    - Corrected \<category\> (genre) to use all lowercase
 
 20190119 - v1.0.3
-    - corrected \<Icon\> typo source xml
+    - Corrected \<Icon\> typo source xml
 
 20190119 - v1.0.2
-    - added header, version, licence, and reference URL for later
+    - Added header, version, licence, and reference URL for later
 
 19 Jan 2019 - v1.0.1
     - Some tidying up
@@ -163,14 +226,15 @@ All other files in this repository have no value and are only here for historica
 20190119 - v1.0
     - First release as working version
 
-## scrape_nhk_genres.py
-NEW: NHK genres scraper
-* goes through the NHK website and attempts to extract genres as NHK defines them.
-* Saves the result into a text file, `genres.txt`.
-* The content of this text file can be copied and pasted into the create `CreateNHKXMLTV.py` file before it is run so the latest genres can be applied.
-* Requires Python 3.x.
-* Runs on Windows, MacOS, Linux.
+### scrape_nhk_genres.py
 
+20250715 - v1.2
+    - Error checking on NHK URL access added for feedback
+    - Refactored for clarity
+    - Changed to GPLv2
 
-## Note:
-All other files in this repository have no value and are only here for historical reason (until they are removed)
+20250715 - v1.1
+    - Merged from development branch into master branch.
+
+20240921 - v1.0
+    - First release as a working version
