@@ -7,3 +7,4 @@ Python/output/
 Python/build/
 Python/dist/
 Python/CreateNHKXMLTV.spec
+Python/scrape_nhk_genres.spec
