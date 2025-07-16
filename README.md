@@ -26,6 +26,34 @@
   
     A python 3.x only version is available
 
+- __RELEASE 1.5__
+
+  - Windows 11 x64  
+
+    Both applications are available through [Releases](https://github.com/Squizzy/NHK-World-XML-to-XMLTV/releases/tag/v1.5)  
+    `CreateNHKXMLTV.exe` is all that's needed here.
+    1. Download into a folder
+    2. Ideally, for security, Virus check the file(s) + check the hash
+  
+        Instructions for Windows 11 Powershell build-in hash check:  
+        For the legitimate expected hash values, run:  
+
+        ```shell
+        Get-FileHash -Path .\CreateNHKXMLTV.exe" -Algorithm SHA25
+        ```
+
+        Hash value: `FC9718E9B01CC5DC13B5A6EC8DBBE105C2E5C6D0093424230B80EC55CBF01C4C`  
+
+        ```shell
+        Get-FileHash -Path .\scrape_nhk_genres.exe" -Algorithm SHA25
+        ```
+
+        Hash value: `7F93C6F9462DC6BE15A8B8C58F770463881BA8C6BF9E53D9257BD526F1032523`  
+
+    3. run `CreateNHKXMLTV.exe` 
+    From the command line or Windows Explorer  
+    The XMLTV is saved in the file `ConvertedNHK.xml` in the same folder.
+
 ## How to run the application which converts the EPG to XMLTV: `CreateNHKXMLTV`
 
 ### Python3
