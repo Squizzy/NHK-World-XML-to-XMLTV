@@ -4,3 +4,6 @@ settings.json
 venv*/
 OlderInfo/
 Python/output/
+Python/build/
+Python/dist/
+Python/CreateNHKXMLTV.spec
